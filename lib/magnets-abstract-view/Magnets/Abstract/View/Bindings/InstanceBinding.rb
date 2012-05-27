@@ -1,18 +1,16 @@
 
 module ::Magnets::Abstract::View::Bindings::InstanceBinding
-
-  ccm = ::CascadingConfiguration::Methods
+  
+  include ::Magnets::Bindings::InstanceBinding::Configuration
 
   ##############
   #  view      #
   #  __view__  #
   ##############
 
-  instance_binding = ::Magnets::Bindings::InstanceBinding::Configuration
-  
-  ccm.alias_instance_method( instance_binding, :__view__, :__container__ )
+  alias_method :__view__, :__container__
 
-  ccm.alias_instance_method( instance_binding, :view, :__view__ )
+  alias_method :view, :__view__
 
   #########################
   #  render_value_valid?  #
@@ -39,38 +37,7 @@ module ::Magnets::Abstract::View::Bindings::InstanceBinding
 	
 	def __render_value__
 	  
-	  rendered_binding_value = nil
-	  
-	  case value = __value__
-      
-      when nil
-      
-        # nothing required
-      
-      when ::String
-
-        rendered_binding_value = value
-        
-      when ::Symbol, ::Integer, ::Float, ::Complex, ::Rational, ::Regexp, 
-           ::Class, ::Module, ::TrueClass, ::FalseClass
-
-        rendered_binding_value = value.to_s
-        
-      when ::File
-        
-        if ::Magnets::Configuration.files.by_path?          
-          rendered_binding_value = ::File.path
-        else
-          rendered_binding_value = ::File.readlines.join
-        end
-        
-      else
-        
-        rendered_binding_value = value
-        
-    end
-    
-    return rendered_binding_value
+    return __value__
     
   end
   

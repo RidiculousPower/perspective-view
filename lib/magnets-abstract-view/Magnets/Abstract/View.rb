@@ -8,5 +8,5 @@ module ::Magnets::Abstract::View
 
 	include ::Magnets::Abstract::View::ObjectInstance
 	include_or_extend_cascades_extends ::Magnets::Abstract::View::ClassInstance
-
+  
 end

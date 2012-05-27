@@ -15,8 +15,8 @@ describe ::Magnets::Abstract::View::Bindings::ClassBinding do
   ####################
   
   it 'can refer to its container class as a view' do
-    ::Magnets::Bindings::ClassBinding.instance_method( :__view_class__ ).should == ::Magnets::Bindings::ClassBinding.instance_method( :__container_class__ )
-    ::Magnets::Bindings::ClassBinding.instance_method( :view_class ).should == ::Magnets::Bindings::ClassBinding.instance_method( :__view_class__ )
+    ::Magnets::Abstract::View::Bindings::ClassBinding.instance_method( :__view_class__ ).should == ::Magnets::Abstract::View::Bindings::ClassBinding.instance_method( :__container_class__ )
+    ::Magnets::Abstract::View::Bindings::ClassBinding.instance_method( :view_class ).should == ::Magnets::Abstract::View::Bindings::ClassBinding.instance_method( :__view_class__ )
   end
 
   ##################################
@@ -25,7 +25,7 @@ describe ::Magnets::Abstract::View::Bindings::ClassBinding do
   ##################################
 
   it 'adds a method to validate the view class' do
-    instance = ::Magnets::Bindings::ClassBinding.new( :binding_name )
+    instance = ::Magnets::Bindings::AttributesContainer::AbstractView::ClassBinding.new( :binding_name )
     called_validate_view = false
     instance.define_singleton_method( :__validate_view_class__ ) do |view_class|
       called_validate_view = true

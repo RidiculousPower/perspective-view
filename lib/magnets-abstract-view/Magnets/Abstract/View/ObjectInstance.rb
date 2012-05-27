@@ -3,6 +3,7 @@ module ::Magnets::Abstract::View::ObjectInstance
 
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array
+  include ::CascadingConfiguration::Array::Unique
 
   ccm = ::CascadingConfiguration::Methods
 

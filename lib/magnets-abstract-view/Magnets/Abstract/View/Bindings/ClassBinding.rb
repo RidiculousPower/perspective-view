@@ -1,19 +1,17 @@
 
 module ::Magnets::Abstract::View::Bindings::ClassBinding
 
-  ccm = ::CascadingConfiguration::Methods
+  include ::Magnets::Bindings::ClassBinding::Configuration
   
   ####################
   #  view_class      #
   #  __view_class__  #
   ####################
   
-  class_binding = ::Magnets::Bindings::ClassBinding::Configuration
+  alias_method :__view_class__, :__container_class__
+
+  alias_method :view_class, :__view_class__
   
-  ccm.alias_instance_method( class_binding, :__view_class__, :__container_class__ )
-
-  ccm.alias_instance_method( class_binding, :view_class, :__view_class__ )
-
   ##################################
   #  __validate_container_class__  #
   ##################################
