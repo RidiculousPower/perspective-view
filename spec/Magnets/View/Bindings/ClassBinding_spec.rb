@@ -31,6 +31,7 @@ describe ::Magnets::Abstract::View::Bindings::ClassBinding do
     instance.define_singleton_method( :__validate_view_class__ ) do |view_class|
       called_validate_view = true
     end
+    instance.is_a?( ::Magnets::Abstract::View::Bindings::ClassBinding ).should == true
     instance.__validate_container_class__( ::Magnets::Abstract::View::Bindings::ClassBinding::MockView )
     called_validate_view.should == true
   end

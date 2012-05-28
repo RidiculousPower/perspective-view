@@ -6,9 +6,9 @@ module ::Magnets::Abstract::View::Attributes::RenderValueAsString
 	#  __render_value__  #
 	######################
 	
-	def __render_value__
+	def __render_value__( current_value = __value__ )
 	  
-    return __value__.to_s
+    return current_value.to_s
     
   end
   

@@ -1,6 +1,8 @@
 
 module ::Magnets::Abstract::View::ObjectInstance
 
+  include ::Magnets::Bindings::Container::ObjectInstance
+
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array
   include ::CascadingConfiguration::Array::Unique

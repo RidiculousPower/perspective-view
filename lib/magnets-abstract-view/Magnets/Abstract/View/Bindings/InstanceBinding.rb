@@ -35,9 +35,9 @@ module ::Magnets::Abstract::View::Bindings::InstanceBinding
 	#  __render_value__  #
 	######################
 	
-	def __render_value__
+	def __render_value__( current_value = __value__ )
 	  
-    return __value__
+    return current_value
     
   end
   
