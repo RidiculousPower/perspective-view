@@ -20,8 +20,8 @@ describe ::Magnets::Abstract::View::Bindings::InstanceBinding do
   #########################
 
   it 'can report whether the current value is valid for rendering and return a render value' do
-    class_instance = ::Magnets::Bindings::AttributesContainer::AbstractView::Text.new( :binding_name )
-    instance = ::Magnets::Bindings::AttributesContainer::AbstractView::Text::InstanceBinding.new( class_instance )
+    class_instance = ::Magnets::Bindings::AttributeContainer::AbstractView::Text.new( :binding_name )
+    instance = ::Magnets::Bindings::AttributeContainer::AbstractView::Text::InstanceBinding.new( class_instance )
     instance.__value__ = :some_value
     instance.is_a?( ::Magnets::Abstract::View::Attributes::RenderValueAsString ).should == true
     instance.render_value_valid?.should == true

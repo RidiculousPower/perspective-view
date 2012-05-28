@@ -25,7 +25,8 @@ describe ::Magnets::Abstract::View::Bindings::ClassBinding do
   ##################################
 
   it 'adds a method to validate the view class' do
-    instance = ::Magnets::Bindings::AttributesContainer::AbstractView::ClassBinding.new( :binding_name )
+    instance = ::Magnets::Bindings::AttributeContainer::AbstractView::Text.new( :binding_name )
+    
     called_validate_view = false
     instance.define_singleton_method( :__validate_view_class__ ) do |view_class|
       called_validate_view = true

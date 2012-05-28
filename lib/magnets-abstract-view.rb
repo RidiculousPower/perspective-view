@@ -33,10 +33,10 @@ end
 
 require_relative( basepath + '.rb' )
 
-class ::Magnets::Bindings::AttributesContainer::AbstractView::ClassBinding
-  include ::Magnets::Abstract::View::Bindings::ClassBinding
+module ::Magnets::Bindings::AttributeContainer::AbstractView::ClassBinding
+  include Magnets::Abstract::View::Bindings::ClassBinding
 end
 
-class ::Magnets::Bindings::AttributesContainer::AbstractView::InstanceBinding
-  include ::Magnets::Abstract::View::Bindings::InstanceBinding
+module ::Magnets::Bindings::AttributeContainer::AbstractView::InstanceBinding
+  include Magnets::Abstract::View::Bindings::InstanceBinding
 end

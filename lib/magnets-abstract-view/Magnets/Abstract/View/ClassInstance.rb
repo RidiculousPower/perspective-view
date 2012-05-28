@@ -17,7 +17,7 @@ module ::Magnets::Abstract::View::ClassInstance
   
   end
     
-  include ::Magnets::Bindings::AttributesContainer::AbstractView
+  include ::Magnets::Bindings::AttributeContainer::AbstractView
   
 	################
   #  attr_order  #
