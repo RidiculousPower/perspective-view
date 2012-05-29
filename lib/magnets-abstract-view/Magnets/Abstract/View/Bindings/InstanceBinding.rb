@@ -43,4 +43,16 @@ module ::Magnets::Abstract::View::Bindings::InstanceBinding
   
   alias_method  :render_value, :__render_value__
 
+  ################################
+  #  __set_value_in_container__  #
+  ################################
+  
+  def __set_value_in_container__
+    
+    if container = __container__
+      container.__autobind__( __render_value__ )    
+    end
+    
+  end
+
 end

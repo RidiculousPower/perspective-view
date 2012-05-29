@@ -1,6 +1,9 @@
 
 module ::Magnets::Abstract::View::Attributes::View
 
+  include ::Magnets::Bindings::Attributes::Text
+  include ::Magnets::Bindings::Attributes::Number
+
   ##########################
   #  binding_value_valid?  #
   ##########################

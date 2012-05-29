@@ -13,8 +13,8 @@ describe ::Magnets::Abstract::View do
       attr_text  :some_other_view
       attr_text :some_third_views
 
-      is_a?( ::Magnets::Abstract::View::ClassInstance ).should == true
-      ancestors.include?( ::Magnets::Abstract::View::ObjectInstance ).should == true
+#      is_a?( ::Magnets::Abstract::View::ClassInstance ).should == true
+ #     ancestors.include?( ::Magnets::Abstract::View::ObjectInstance ).should == true
 
     end
     
@@ -108,6 +108,45 @@ describe ::Magnets::Abstract::View do
     instance.some_required_binding = :some_value
 
     Proc.new { instance.__ensure_binding_render_values_valid__ }.should_not raise_error
+    
+  end
+
+  it 'can cascade definitions' do
+
+    module ::Magnets::Abstract::View::MockModule
+      include ::Magnets::Abstract::View
+      attr_binding :some_binding
+      attr_text :some_text
+      attr_numbers :some_numbers
+    end
+
+    class ::Magnets::Abstract::View::MockClass
+      include ::Magnets::Abstract::View::MockModule
+    end
+
+    module ::Magnets::Abstract::View::MockModule2
+      include ::Magnets::Abstract::View::MockModule
+    end
+
+    class ::Magnets::Abstract::View::MockClass2
+      include ::Magnets::Abstract::View::MockModule2
+    end
+
+    ::Magnets::Abstract::View::MockModule.has_binding?( :some_binding ).should == true
+    ::Magnets::Abstract::View::MockModule.has_binding?( :some_text ).should == true
+    ::Magnets::Abstract::View::MockModule.has_binding?( :some_numbers ).should == true
+    
+    ::Magnets::Abstract::View::MockClass.has_binding?( :some_binding ).should == true
+    ::Magnets::Abstract::View::MockClass.has_binding?( :some_text ).should == true
+    ::Magnets::Abstract::View::MockClass.has_binding?( :some_numbers ).should == true
+
+    ::Magnets::Abstract::View::MockModule2.has_binding?( :some_binding ).should == true
+    ::Magnets::Abstract::View::MockModule2.has_binding?( :some_text ).should == true
+    ::Magnets::Abstract::View::MockModule2.has_binding?( :some_numbers ).should == true
+
+    ::Magnets::Abstract::View::MockClass2.has_binding?( :some_binding ).should == true
+    ::Magnets::Abstract::View::MockClass2.has_binding?( :some_text ).should == true
+    ::Magnets::Abstract::View::MockClass2.has_binding?( :some_numbers ).should == true
     
   end
   

@@ -1,8 +1,6 @@
 
 module ::Magnets::Abstract::View::ClassInstance
-  
-  include ::Magnets::Bindings::Container::ClassInstance
-  
+    
   ::Magnets::Bindings::Attributes.define_container_type( :abstract_view, :bindings ) do
 
     define_binding_type( :view,     ::Magnets::Abstract::View::Attributes::View )
@@ -11,6 +9,7 @@ module ::Magnets::Abstract::View::ClassInstance
     extend_binding_type( :integer,  ::Magnets::Abstract::View::Attributes::RenderValueAsString )
     extend_binding_type( :float,    ::Magnets::Abstract::View::Attributes::RenderValueAsString )
     extend_binding_type( :rational, ::Magnets::Abstract::View::Attributes::RenderValueAsString )
+    extend_binding_type( :number,   ::Magnets::Abstract::View::Attributes::RenderValueAsString )
     extend_binding_type( :complex,  ::Magnets::Abstract::View::Attributes::RenderValueAsString )
     extend_binding_type( :regexp,   ::Magnets::Abstract::View::Attributes::RenderValueAsString )
     extend_binding_type( :module,   ::Magnets::Abstract::View::Attributes::RenderValueAsString )
@@ -20,7 +19,7 @@ module ::Magnets::Abstract::View::ClassInstance
   end
     
   include ::Magnets::Bindings::AttributeContainer::AbstractView
-  
+
 	################
   #  attr_order  #
   ################
