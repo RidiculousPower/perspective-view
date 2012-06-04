@@ -19,9 +19,10 @@ files = [
   'Attributes/RenderValueAsString',
   'Attributes/View',
   
-  'Bindings/ClassBinding',
-  'Bindings/InstanceBinding',
+  'Configuration',
   
+  'Bindings/ClassBinding',
+  'Bindings/InstanceBinding',  
   'ObjectInstance',
   'ClassInstance'
   

@@ -13,8 +13,8 @@ describe ::Magnets::Abstract::View do
       attr_text  :some_other_view
       attr_text :some_third_views
 
-#      is_a?( ::Magnets::Abstract::View::ClassInstance ).should == true
- #     ancestors.include?( ::Magnets::Abstract::View::ObjectInstance ).should == true
+      is_a?( ::Magnets::Abstract::View::ClassInstance ).should == true
+      ancestors.include?( ::Magnets::Abstract::View::ObjectInstance ).should == true
 
     end
     
@@ -98,7 +98,7 @@ describe ::Magnets::Abstract::View do
     
       attr_text :some_binding
       attr_required_text :some_required_binding
-      
+
     end
     
     Proc.new { ::Magnets::Abstract::View::Mock.new.__ensure_binding_render_values_valid__ }.should raise_error( ::Magnets::Bindings::Exception::BindingRequired )

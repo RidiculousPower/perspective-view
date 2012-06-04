@@ -2,6 +2,7 @@
 module ::Magnets::Abstract::View::Bindings::ClassBinding
 
   include ::Magnets::Bindings::ClassBinding::Configuration
+  include ::Magnets::Abstract::View::Configuration
   
   ####################
   #  view_class      #

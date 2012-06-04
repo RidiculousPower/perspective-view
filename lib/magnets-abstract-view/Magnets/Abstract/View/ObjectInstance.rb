@@ -2,54 +2,7 @@
 module ::Magnets::Abstract::View::ObjectInstance
 
   include ::Magnets::Bindings::Container::ObjectInstance
-
-  include ::CascadingConfiguration::Setting
-  include ::CascadingConfiguration::Array
-  include ::CascadingConfiguration::Array::Unique
-
-  ccm = ::CascadingConfiguration::Methods
-
-  #######################
-  #  binding_order      #
-  #  __binding_order__  #
-  #######################
-
-  attr_configuration_array  :__binding_order__ do
-    
-    #======================#
-	  #  child_pre_set_hook  #
-	  #======================#
-
-	  def child_pre_set_hook( index, binding_name, is_insert )
-      
-      child_instance = nil
-      
-      case configuration_instance
-        
-        when ::Magnets::Abstract::View::ObjectInstance
-
-          child_instance = configuration_instance.__binding__( binding_name )
-        
-        else
-
-          child_instance = binding_name
-          
-      end
-      
-      return child_instance
-      
-	  end
-	  
-  end
-  
-  ccm.alias_module_and_instance_methods( self, :binding_order, :__binding_order__ )
-  
-  #######################################
-  #  binding_order_declared_empty?      #
-  #  __binding_order_declared_empty__=  #
-  #######################################
-  
-  attr_configuration  :binding_order_declared_empty? => :__binding_order_declared_empty__=
+  include ::Magnets::Abstract::View::Configuration
   
   ######################
   #  rendering_empty!  #

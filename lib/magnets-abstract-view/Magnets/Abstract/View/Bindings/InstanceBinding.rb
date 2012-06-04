@@ -2,6 +2,7 @@
 module ::Magnets::Abstract::View::Bindings::InstanceBinding
   
   include ::Magnets::Bindings::InstanceBinding::Configuration
+  include ::Magnets::Abstract::View::Configuration
 
   ##############
   #  view      #
