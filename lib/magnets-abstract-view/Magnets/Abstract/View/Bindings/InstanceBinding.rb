@@ -4,14 +4,18 @@ module ::Magnets::Abstract::View::Bindings::InstanceBinding
   include ::Magnets::Bindings::InstanceBinding::Configuration
   include ::Magnets::Abstract::View::Configuration
 
-  ##############
-  #  view      #
-  #  __view__  #
-  ##############
+  ###############
+  #  view       #
+  #  view=      #
+  #  __view__   #
+  #  __view__=  #
+  ###############
 
   alias_method :__view__, :__container__
+  alias_method :__view__=, :__container__=
 
   alias_method :view, :__view__
+  alias_method :view=, :__view__=
 
   #########################
   #  render_value_valid?  #
