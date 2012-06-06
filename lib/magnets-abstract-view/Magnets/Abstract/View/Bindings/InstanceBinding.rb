@@ -17,24 +17,6 @@ module ::Magnets::Abstract::View::Bindings::InstanceBinding
   alias_method :view, :__view__
   alias_method :view=, :__view__=
 
-  #########################
-  #  render_value_valid?  #
-  #########################
-
-  def render_value_valid?
-    
-    render_value_valid = true
-    
-    if required? and __value__.nil?
-      render_value_valid = false
-    end
-    
-    return render_value_valid
-    
-  end
-  
-  alias_method  :ensure_render_value_valid, :render_value_valid?
-
 	######################
 	#  render_value      #
 	#  __render_value__  #
@@ -47,6 +29,28 @@ module ::Magnets::Abstract::View::Bindings::InstanceBinding
   end
   
   alias_method  :render_value, :__render_value__
+
+  #########################
+  #  render_value_valid?  #
+  #########################
+
+  def render_value_valid?( ensure_valid = false, view_rendering_empty = false )
+    
+    render_value_valid = true
+    
+    if required? and __value__.nil?
+      render_value_valid = false
+    elsif view = __view__
+      render_value_valid = view.render_value_valid?( ensure_valid, view_rendering_empty )
+    end
+
+    if ensure_valid and ! render_value_valid
+      raise ::Magnets::Bindings::Exception::BindingRequired.new( self )
+    end
+    
+    return render_value_valid
+    
+  end
 
   ################################
   #  __set_value_in_container__  #

@@ -22,6 +22,7 @@ files = [
   'Configuration',
   
   'Bindings/ClassBinding',
+  'Bindings/ClassBinding/ClassInstance',
   'Bindings/InstanceBinding',  
   'ObjectInstance',
   'ClassInstance'
@@ -35,9 +36,13 @@ end
 require_relative( basepath + '.rb' )
 
 module ::Magnets::Bindings::AttributeContainer::AbstractView::ClassBinding
-  include Magnets::Abstract::View::Bindings::ClassBinding
+  include ::Magnets::Abstract::View::Bindings::ClassBinding
+end
+
+class ::Magnets::Bindings::ClassBinding
+  extend ::Magnets::Abstract::View::Bindings::ClassBinding::ClassInstance
 end
 
 module ::Magnets::Bindings::AttributeContainer::AbstractView::InstanceBinding
-  include Magnets::Abstract::View::Bindings::InstanceBinding
+  include ::Magnets::Abstract::View::Bindings::InstanceBinding
 end

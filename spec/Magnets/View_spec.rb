@@ -87,10 +87,9 @@ describe ::Magnets::Abstract::View do
     
   end
 
-  ############################################
-  #  ensure_binding_render_values_valid      #
-  #  __ensure_binding_render_values_valid__  #
-  ############################################
+  #########################
+  #  render_value_valid?  #
+  #########################
   
   it 'can run a check just before render-time to ensure value is valid for rendering' do
     
@@ -101,13 +100,13 @@ describe ::Magnets::Abstract::View do
 
     end
     
-    Proc.new { ::Magnets::Abstract::View::Mock.new.__ensure_binding_render_values_valid__ }.should raise_error( ::Magnets::Bindings::Exception::BindingRequired )
+    Proc.new { ::Magnets::Abstract::View::Mock.new.render_value_valid?( true ) }.should raise_error( ::Magnets::Bindings::Exception::BindingRequired )
 
     instance = ::Magnets::Abstract::View::Mock.new
     
     instance.some_required_binding = :some_value
 
-    Proc.new { instance.__ensure_binding_render_values_valid__ }.should_not raise_error
+    Proc.new { instance.render_value_valid?( true ) }.should_not raise_error
     
   end
 
