@@ -12,6 +12,7 @@ module ::Magnets::Abstract::View::Configuration
   #######################
 
   attr_configuration_array  :__binding_order__ do
+
     #======================#
 	  #  child_pre_set_hook  #
 	  #======================#

@@ -3,7 +3,7 @@ module ::Magnets::Abstract::View::ClassInstance
 
   include ::Magnets::Abstract::View::Configuration
     
-  ::Magnets::Bindings::Attributes.define_container_type( :abstract_view, :bindings ) do
+  ::Magnets::Bindings::Attributes.define_container_type( :abstract_view, true, :bindings ) do
 
     define_binding_type( :view,     ::Magnets::Abstract::View::Attributes::View )
 
@@ -62,8 +62,7 @@ module ::Magnets::Abstract::View::ClassInstance
 	def __validate_binding_name_for_order__( binding_name )
 	  
 	  unless has_binding?( binding_name )
-  		raise ::Magnets::Bindings::Exception::NoBindingError,
-  		      'No binding defined for :' + binding_name.to_s + '.'
+  		raise ::Magnets::Bindings::Exception::NoBindingError.new( self, binding_name )
     end
 	  
   end

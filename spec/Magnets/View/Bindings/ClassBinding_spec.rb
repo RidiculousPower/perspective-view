@@ -4,6 +4,9 @@ require_relative '../../../../lib/magnets-abstract-view.rb'
 describe ::Magnets::Abstract::View::Bindings::ClassBinding do
 
   before :all do
+    class ::Magnets::Abstract::View::Bindings::ClassBinding::Mock
+      include ::Magnets::Bindings::Container
+    end
     class ::Magnets::Abstract::View::Bindings::ClassBinding::MockView
       include ::Magnets::Bindings::Container
     end
@@ -25,7 +28,7 @@ describe ::Magnets::Abstract::View::Bindings::ClassBinding do
   ##################################
 
   it 'adds a method to validate the view class' do
-    instance = ::Magnets::Bindings::AttributeContainer::AbstractView::Text.new( :binding_name )
+    instance = ::Magnets::Bindings::AttributeContainer::AbstractView::Text.new( ::Magnets::Abstract::View::Bindings::ClassBinding::Mock, :binding_name )
     
     called_validate_view = false
     instance.define_singleton_method( :__validate_view_class__ ) do |view_class|

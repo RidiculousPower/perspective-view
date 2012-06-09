@@ -1,7 +1,7 @@
 
 module ::Magnets::Abstract::View::Bindings::InstanceBinding
   
-  include ::Magnets::Bindings::InstanceBinding::Configuration
+  include ::Magnets::Bindings::InstanceBinding::Interface
   include ::Magnets::Abstract::View::Configuration
 
   ###############
@@ -49,18 +49,6 @@ module ::Magnets::Abstract::View::Bindings::InstanceBinding
     end
     
     return render_value_valid
-    
-  end
-
-  ################################
-  #  __set_value_in_container__  #
-  ################################
-  
-  def __set_value_in_container__
-    
-    if container = __container__
-      container.__autobind__( __render_value__ )    
-    end
     
   end
 

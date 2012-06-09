@@ -41,6 +41,8 @@ module ::Magnets::Abstract::View::ObjectInstance
 	    end
 	    
 		end
+		
+    @__view_rendering_empty__ = false
 		    
     return child_nodes
     
@@ -52,14 +54,10 @@ module ::Magnets::Abstract::View::ObjectInstance
 
   def render_value_valid?( ensure_valid = false, view_rendering_empty = @__view_rendering_empty__ )
     
-    render_value_valid = false
+    render_value_valid = true
     
-    if view_rendering_empty
+    unless view_rendering_empty
 
-      @__view_rendering_empty__ = false
-    
-    else
-      
       __bindings__.each do |this_binding_name, this_binding_instance|
         
         render_value_valid = this_binding_instance.render_value_valid?( ensure_valid, 

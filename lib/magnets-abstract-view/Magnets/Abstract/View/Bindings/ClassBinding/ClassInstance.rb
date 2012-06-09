@@ -1,7 +1,7 @@
 
 module ::Magnets::Abstract::View::Bindings::ClassBinding::ClassInstance
 
-  include ::Magnets::Bindings::ClassBinding::Configuration
+  include ::Magnets::Bindings::ClassBinding::ClassInstance
 
   #####################
   #  view_class       #
