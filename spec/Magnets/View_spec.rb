@@ -1,20 +1,20 @@
 
 require_relative '../../lib/magnets-abstract-view.rb'
 
-describe ::Magnets::Abstract::View do
+describe ::Magnets::View do
 
   before :all do
     
-    class ::Magnets::Abstract::View::Mock
+    class ::Magnets::View::Mock
       
-      include ::Magnets::Abstract::View
+      include ::Magnets::View
       
       attr_text  :some_text
       attr_text  :some_other_view
       attr_text :some_third_views
 
-      is_a?( ::Magnets::Abstract::View::ClassInstance ).should == true
-      ancestors.include?( ::Magnets::Abstract::View::ObjectInstance ).should == true
+      is_a?( ::Magnets::View::ClassInstance ).should == true
+      ancestors.include?( ::Magnets::View::ObjectInstance ).should == true
 
     end
     
@@ -33,10 +33,10 @@ describe ::Magnets::Abstract::View do
 	#########################################
 
   it 'can order bindings in sequence and render the binding order, returning a stack of rendered "nodes", which can be arbitrarily defined so long as they stack in an array' do
-    ::Magnets::Abstract::View.instance_method( :binding_order ).should == ::Magnets::Abstract::View.instance_method( :__binding_order__ )
-    ::Magnets::Abstract::View::ObjectInstance.instance_method( :binding_order ).should == ::Magnets::Abstract::View::ObjectInstance.instance_method( :__binding_order__ )
+    ::Magnets::View.instance_method( :binding_order ).should == ::Magnets::View.instance_method( :__binding_order__ )
+    ::Magnets::View::ObjectInstance.instance_method( :binding_order ).should == ::Magnets::View::ObjectInstance.instance_method( :__binding_order__ )
 
-    class ::Magnets::Abstract::View::Mock
+    class ::Magnets::View::Mock
       
       __binding_order__.is_a?( ::Array ).should == true
 
@@ -48,15 +48,15 @@ describe ::Magnets::Abstract::View do
 
     end
 
-    Proc.new { ::Magnets::Abstract::View::Mock.attr_order :first_binding, :third_binding }.should raise_error( ::Magnets::Bindings::Exception::NoBindingError )
+    Proc.new { ::Magnets::View::Mock.attr_order :first_binding, :third_binding }.should raise_error( ::Magnets::Bindings::Exception::NoBindingError )
 
-    class ::Magnets::Abstract::View::Mock
+    class ::Magnets::View::Mock
 
       attr_binding :third_binding
 
     end
 
-    class ::Magnets::Abstract::View::Mock
+    class ::Magnets::View::Mock
 
       attr_order :first_binding, :third_binding
 
@@ -76,7 +76,7 @@ describe ::Magnets::Abstract::View do
       
     end
     
-    instance = ::Magnets::Abstract::View::Mock.new
+    instance = ::Magnets::View::Mock.new
     
     instance.rendering_empty?.should == false
     instance.rendering_empty!
@@ -93,16 +93,16 @@ describe ::Magnets::Abstract::View do
   
   it 'can run a check just before render-time to ensure value is valid for rendering' do
     
-    class ::Magnets::Abstract::View::Mock
+    class ::Magnets::View::Mock
     
       attr_text :some_binding
       attr_required_text :some_required_binding
 
     end
     
-    Proc.new { ::Magnets::Abstract::View::Mock.new.render_value_valid?( true ) }.should raise_error( ::Magnets::Bindings::Exception::BindingRequired )
+    Proc.new { ::Magnets::View::Mock.new.render_value_valid?( true ) }.should raise_error( ::Magnets::Bindings::Exception::BindingRequired )
 
-    instance = ::Magnets::Abstract::View::Mock.new
+    instance = ::Magnets::View::Mock.new
     
     instance.some_required_binding = :some_value
 
@@ -112,40 +112,40 @@ describe ::Magnets::Abstract::View do
 
   it 'can cascade definitions' do
 
-    module ::Magnets::Abstract::View::MockModule
-      include ::Magnets::Abstract::View
+    module ::Magnets::View::MockModule
+      include ::Magnets::View
       attr_binding :some_binding
       attr_text :some_text
       attr_numbers :some_numbers
     end
 
-    class ::Magnets::Abstract::View::MockClass
-      include ::Magnets::Abstract::View::MockModule
+    class ::Magnets::View::MockClass
+      include ::Magnets::View::MockModule
     end
 
-    module ::Magnets::Abstract::View::MockModule2
-      include ::Magnets::Abstract::View::MockModule
+    module ::Magnets::View::MockModule2
+      include ::Magnets::View::MockModule
     end
 
-    class ::Magnets::Abstract::View::MockClass2
-      include ::Magnets::Abstract::View::MockModule2
+    class ::Magnets::View::MockClass2
+      include ::Magnets::View::MockModule2
     end
 
-    ::Magnets::Abstract::View::MockModule.has_binding?( :some_binding ).should == true
-    ::Magnets::Abstract::View::MockModule.has_binding?( :some_text ).should == true
-    ::Magnets::Abstract::View::MockModule.has_binding?( :some_numbers ).should == true
+    ::Magnets::View::MockModule.has_binding?( :some_binding ).should == true
+    ::Magnets::View::MockModule.has_binding?( :some_text ).should == true
+    ::Magnets::View::MockModule.has_binding?( :some_numbers ).should == true
     
-    ::Magnets::Abstract::View::MockClass.has_binding?( :some_binding ).should == true
-    ::Magnets::Abstract::View::MockClass.has_binding?( :some_text ).should == true
-    ::Magnets::Abstract::View::MockClass.has_binding?( :some_numbers ).should == true
+    ::Magnets::View::MockClass.has_binding?( :some_binding ).should == true
+    ::Magnets::View::MockClass.has_binding?( :some_text ).should == true
+    ::Magnets::View::MockClass.has_binding?( :some_numbers ).should == true
 
-    ::Magnets::Abstract::View::MockModule2.has_binding?( :some_binding ).should == true
-    ::Magnets::Abstract::View::MockModule2.has_binding?( :some_text ).should == true
-    ::Magnets::Abstract::View::MockModule2.has_binding?( :some_numbers ).should == true
+    ::Magnets::View::MockModule2.has_binding?( :some_binding ).should == true
+    ::Magnets::View::MockModule2.has_binding?( :some_text ).should == true
+    ::Magnets::View::MockModule2.has_binding?( :some_numbers ).should == true
 
-    ::Magnets::Abstract::View::MockClass2.has_binding?( :some_binding ).should == true
-    ::Magnets::Abstract::View::MockClass2.has_binding?( :some_text ).should == true
-    ::Magnets::Abstract::View::MockClass2.has_binding?( :some_numbers ).should == true
+    ::Magnets::View::MockClass2.has_binding?( :some_binding ).should == true
+    ::Magnets::View::MockClass2.has_binding?( :some_text ).should == true
+    ::Magnets::View::MockClass2.has_binding?( :some_numbers ).should == true
     
   end
   

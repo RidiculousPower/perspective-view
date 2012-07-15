@@ -1,0 +1,29 @@
+
+module ::Magnets::View::Attributes::RenderFileValue
+
+	########################
+	#  render_value        #
+	#  autobind_value      #
+	#  __render_value__    #
+	#  __autobind_value__  #
+	########################
+	
+	def __autobind_value__
+	  
+	  rendered_binding_value = nil
+	  
+    if ::Magnets::Configuration.files.by_path?          
+      rendered_binding_value = ::File.path
+    else
+      rendered_binding_value = ::File.readlines.join
+    end
+    
+    return rendered_binding_value
+    
+  end
+  
+  alias_method  :autobind_value, :__autobind_value__
+  alias_method  :__render_value__, :__autobind_value__
+  alias_method  :render_value, :__render_value__
+
+end

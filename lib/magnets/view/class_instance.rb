@@ -1,22 +1,22 @@
 
-module ::Magnets::Abstract::View::ClassInstance
+module ::Magnets::View::ClassInstance
 
-  include ::Magnets::Abstract::View::Configuration
+  include ::Magnets::View::Configuration
     
   ::Magnets::Bindings::Attributes.define_container_type( :abstract_view, true, :bindings ) do
 
-    define_binding_type( :view,     ::Magnets::Abstract::View::Attributes::View )
+    define_binding_type( :view,     ::Magnets::View::Attributes::View )
 
-    extend_binding_type( :text,     ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :integer,  ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :float,    ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :rational, ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :number,   ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :complex,  ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :regexp,   ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :module,   ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :class,    ::Magnets::Abstract::View::Attributes::RenderValueAsString )
-    extend_binding_type( :file,     ::Magnets::Abstract::View::Attributes::RenderFileValue )
+    extend_binding_type( :text,     ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :integer,  ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :float,    ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :rational, ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :number,   ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :complex,  ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :regexp,   ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :module,   ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :class,    ::Magnets::View::Attributes::RenderValueAsString )
+    extend_binding_type( :file,     ::Magnets::View::Attributes::RenderFileValue )
   
   end
     

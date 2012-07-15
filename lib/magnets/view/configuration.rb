@@ -1,7 +1,5 @@
 
-module ::Magnets::Abstract::View::Configuration
-
-  ccm = ::CascadingConfiguration::Methods
+module ::Magnets::View::Configuration
 
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array
@@ -11,7 +9,7 @@ module ::Magnets::Abstract::View::Configuration
   #  __binding_order__  #
   #######################
 
-  attr_configuration_array  :__binding_order__ do
+  attr_array  :__binding_order__ do
 
     #======================#
 	  #  child_pre_set_hook  #
@@ -23,7 +21,7 @@ module ::Magnets::Abstract::View::Configuration
       
       case instance = configuration_instance
         
-        when ::Magnets::Abstract::View::ObjectInstance
+        when ::Magnets::View::ObjectInstance
           
           case binding_name
             
@@ -49,7 +47,7 @@ module ::Magnets::Abstract::View::Configuration
 	  
   end
   
-  ccm.alias_module_and_instance_methods( self, :binding_order, :__binding_order__ )
+  Controller.alias_module_and_instance_methods( :binding_order, :__binding_order__ )
   
   #######################################
   #  binding_order_declared_empty?      #

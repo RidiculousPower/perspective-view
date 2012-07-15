@@ -1,5 +1,5 @@
 
-module ::Magnets::Abstract::View::Bindings::ClassBinding::ClassInstance
+module ::Magnets::View::Bindings::ClassBinding::ClassInstance
 
   include ::Magnets::Bindings::ClassBinding::ClassInstance
 

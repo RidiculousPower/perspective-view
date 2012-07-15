@@ -1,8 +1,8 @@
 
-module ::Magnets::Abstract::View::ObjectInstance
+module ::Magnets::View::ObjectInstance
 
   include ::Magnets::Bindings::Container::ObjectInstance
-  include ::Magnets::Abstract::View::Configuration
+  include ::Magnets::View::Configuration
   
   ######################
   #  rendering_empty!  #
