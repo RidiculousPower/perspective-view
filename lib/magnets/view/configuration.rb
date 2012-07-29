@@ -18,7 +18,7 @@ module ::Magnets::View::Configuration
 	  def child_pre_set_hook( index, binding_name, is_insert )
       
       child_instance = nil
-      
+
       case instance = configuration_instance
         
         when ::Magnets::View::ObjectInstance
@@ -40,7 +40,7 @@ module ::Magnets::View::Configuration
           child_instance = binding_name
           
       end
-      
+
       return child_instance
       
 	  end

@@ -1,8 +1,6 @@
 
 module ::Magnets::View::ClassInstance
 
-  include ::Magnets::View::Configuration
-    
   ::Magnets::Bindings::Attributes.define_container_type( :abstract_view, true, :bindings ) do
 
     define_binding_type( :view,     ::Magnets::View::Attributes::View )

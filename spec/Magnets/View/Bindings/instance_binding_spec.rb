@@ -1,5 +1,5 @@
 
-require_relative '../../../../lib/magnets-abstract-view.rb'
+require_relative '../../../../lib/magnets-view.rb'
 
 describe ::Magnets::View::Bindings::InstanceBinding do
 
