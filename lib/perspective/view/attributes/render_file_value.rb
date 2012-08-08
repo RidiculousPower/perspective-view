@@ -1,5 +1,5 @@
 
-module ::Magnets::View::Attributes::RenderFileValue
+module ::Perspective::View::Attributes::RenderFileValue
 
 	########################
 	#  render_value        #
@@ -12,7 +12,7 @@ module ::Magnets::View::Attributes::RenderFileValue
 	  
 	  rendered_binding_value = nil
 	  
-    if ::Magnets::Configuration.files.by_path?          
+    if ::Perspective::Configuration.files.by_path?          
       rendered_binding_value = ::File.path
     else
       rendered_binding_value = ::File.readlines.join

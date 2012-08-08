@@ -1,7 +1,7 @@
 
 begin ; require 'development' ; rescue ::LoadError ; end
 
-require 'magnets/bindings'
+require 'perspective/bindings'
 
 # namespaces that have to be declared ahead of time for proper load order
 require_relative './namespaces'
@@ -12,15 +12,15 @@ require_relative './requires.rb'
 # post-require setup
 require_relative './setup.rb'
 
-module ::Magnets::View
+module ::Perspective::View
 
   extend ::Module::Cluster
 
-  include ::Magnets::Bindings
+  include ::Perspective::Bindings
 
-	include ::Magnets::View::ObjectInstance
+	include ::Perspective::View::ObjectInstance
   
-  cascade = cluster( :magnets ).before_include_or_extend.cascade
-  cascade.extend( ::Magnets::View::ClassInstance )
+  cascade = cluster( :perspective ).before_include_or_extend.cascade
+  cascade.extend( ::Perspective::View::ClassInstance )
 
 end

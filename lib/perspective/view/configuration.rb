@@ -1,5 +1,5 @@
 
-module ::Magnets::View::Configuration
+module ::Perspective::View::Configuration
 
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array
@@ -21,7 +21,7 @@ module ::Magnets::View::Configuration
 
       case instance = configuration_instance
         
-        when ::Magnets::View::ObjectInstance
+        when ::Perspective::View::ObjectInstance
           
           case binding_name
             
@@ -29,7 +29,7 @@ module ::Magnets::View::Configuration
 
               child_instance = instance.__binding__( binding_name )
 
-            when ::Magnets::Bindings::InstanceBinding
+            when ::Perspective::Bindings::InstanceBinding
 
               child_instance = binding_name
             

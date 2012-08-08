@@ -1,8 +1,8 @@
 
-module ::Magnets::View::ObjectInstance
+module ::Perspective::View::ObjectInstance
 
-  include ::Magnets::Bindings::Container::ObjectInstance
-  include ::Magnets::View::Configuration
+  include ::Perspective::Bindings::Container::ObjectInstance
+  include ::Perspective::View::Configuration
   
   ######################
   #  rendering_empty!  #

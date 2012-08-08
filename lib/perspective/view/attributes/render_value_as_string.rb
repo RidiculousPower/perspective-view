@@ -1,5 +1,5 @@
 
-module ::Magnets::View::Attributes::RenderValueAsString
+module ::Perspective::View::Attributes::RenderValueAsString
 
 	########################
 	#  render_value        #

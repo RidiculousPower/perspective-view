@@ -1,8 +1,8 @@
 
-module ::Magnets::View::Bindings::InstanceBinding
+module ::Perspective::View::Bindings::InstanceBinding
   
-  include ::Magnets::Bindings::InstanceBinding::Interface
-  include ::Magnets::View::Configuration
+  include ::Perspective::Bindings::InstanceBinding::Interface
+  include ::Perspective::View::Configuration
 
   ###############
   #  view       #
@@ -49,7 +49,7 @@ module ::Magnets::View::Bindings::InstanceBinding
     end
 
     if ensure_valid and ! render_value_valid
-      raise ::Magnets::Bindings::Exception::BindingRequired.new( self )
+      raise ::Perspective::Bindings::Exception::BindingRequired.new( self )
     end
     
     return render_value_valid

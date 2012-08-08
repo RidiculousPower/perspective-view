@@ -1,7 +1,7 @@
 
-module ::Magnets::View::Bindings::ClassBinding::ClassInstance
+module ::Perspective::View::Bindings::ClassBinding::ClassInstance
 
-  include ::Magnets::Bindings::ClassBinding::ClassInstance
+  include ::Perspective::Bindings::ClassBinding::ClassInstance
 
   #####################
   #  view_class       #

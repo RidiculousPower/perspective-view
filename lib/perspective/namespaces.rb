@@ -1,5 +1,5 @@
 
-module ::Magnets::View
+module ::Perspective::View
   module Attributes
   end
   module Bindings

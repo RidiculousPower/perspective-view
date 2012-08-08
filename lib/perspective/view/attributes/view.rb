@@ -1,8 +1,8 @@
 
-module ::Magnets::View::Attributes::View
+module ::Perspective::View::Attributes::View
 
-  include ::Magnets::Bindings::Attributes::Text
-  include ::Magnets::Bindings::Attributes::Number
+  include ::Perspective::Bindings::Attributes::Text
+  include ::Perspective::Bindings::Attributes::Number
 
   ##########################
   #  binding_value_valid?  #
@@ -12,7 +12,7 @@ module ::Magnets::View::Attributes::View
     
     binding_value_valid = false
     
-    if binding_value.is_a?( ::Magnets::View )
+    if binding_value.is_a?( ::Perspective::View )
       
       binding_value_valid = true
       
