@@ -104,7 +104,7 @@ describe ::Perspective::View do
 
     instance = ::Perspective::View::Mock.new
     
-    instance.some_required_binding = :some_value
+    instance.some_required_binding.value = :some_value
 
     Proc.new { instance.render_value_valid?( true ) }.should_not raise_error
     
