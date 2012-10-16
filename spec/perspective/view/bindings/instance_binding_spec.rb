@@ -27,7 +27,7 @@ describe ::Perspective::View::Bindings::InstanceBinding do
 
   it 'can report whether the current value is valid for rendering and return a render value' do
     class_instance = ::Perspective::Bindings::AttributeContainer::AbstractView::Text.new( ::Perspective::View::Bindings::InstanceBinding::Mock, :binding_name )
-    instance = ::Perspective::Bindings::AttributeContainer::AbstractView::Text::InstanceBinding.new( class_instance, Object.new )
+    instance = ::Perspective::Bindings::AttributeContainer::AbstractView::Text::InstanceBinding.new( class_instance, ::Perspective::View::Bindings::InstanceBinding::Mock.new )
     instance.__value__ = :some_value
     instance.is_a?( ::Perspective::View::Attributes::RenderValueAsString ).should == true
     instance.render_value_valid?.should == true

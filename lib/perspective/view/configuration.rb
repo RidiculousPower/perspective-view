@@ -15,7 +15,7 @@ module ::Perspective::View::Configuration
 	  #  child_pre_set_hook  #
 	  #======================#
 
-	  def child_pre_set_hook( index, binding_name, is_insert )
+	  def child_pre_set_hook( index, binding_name, is_insert, parent_instance )
       
       child_instance = nil
 
