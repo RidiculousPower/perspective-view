@@ -42,7 +42,7 @@ module ::Perspective::View::Bindings::InstanceBinding
     
     render_value_valid = true
 
-    if required? and ! view_rendering_empty and __value__.nil?
+    if __required__? and ! view_rendering_empty and __value__.nil?
       render_value_valid = false
     elsif view = __view__
       render_value_valid = view.render_value_valid?( ensure_valid, view_rendering_empty )
