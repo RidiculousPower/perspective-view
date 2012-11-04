@@ -27,8 +27,8 @@ describe ::Perspective::View do
   #  __validate_binding_name_for_order__  #
   #  binding_order_declared_empty?        #
   #  __binding_order_declared_empty__?    #
-  #  rendering_empty!                     #
-  #  rendering_empty?                     #
+  #  __rendering_empty__!                     #
+  #  __rendering_empty__?                     #
   #  __render_binding_order__             #
 	#########################################
 
@@ -78,18 +78,18 @@ describe ::Perspective::View do
     
     instance = ::Perspective::View::Mock.new
     
-    instance.rendering_empty?.should == false
-    instance.rendering_empty!
-    instance.rendering_empty?.should == true
+    instance.__rendering_empty__?.should == false
+    instance.__rendering_empty__!
+    instance.__rendering_empty__?.should == true
     instance.__binding_order__.should == [ instance.__binding__( :first_binding ),
                                            instance.__binding__( :second_binding ),
                                            instance.__binding__( :third_binding ) ]
     
   end
 
-  #########################
-  #  render_value_valid?  #
-  #########################
+  #############################
+  #  __render_value_valid__?  #
+  #############################
   
   it 'can run a check just before render-time to ensure value is valid for rendering' do
     
@@ -100,13 +100,13 @@ describe ::Perspective::View do
 
     end
     
-    Proc.new { ::Perspective::View::Mock.new.render_value_valid?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
+    Proc.new { ::Perspective::View::Mock.new.__render_value_valid__?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
 
     instance = ::Perspective::View::Mock.new
     
-    instance.some_required_binding.value = :some_value
+    instance.some_required_binding = :some_value
 
-    Proc.new { instance.render_value_valid?( true ) }.should_not raise_error
+    Proc.new { instance.__render_value_valid__?( true ) }.should_not raise_error
     
   end
 
@@ -131,21 +131,21 @@ describe ::Perspective::View do
       include ::Perspective::View::MockModule2
     end
 
-    ::Perspective::View::MockModule.has_binding?( :some_binding ).should == true
-    ::Perspective::View::MockModule.has_binding?( :some_text ).should == true
-    ::Perspective::View::MockModule.has_binding?( :some_numbers ).should == true
+    ::Perspective::View::MockModule.__has_binding__?( :some_binding ).should == true
+    ::Perspective::View::MockModule.__has_binding__?( :some_text ).should == true
+    ::Perspective::View::MockModule.__has_binding__?( :some_numbers ).should == true
     
-    ::Perspective::View::MockClass.has_binding?( :some_binding ).should == true
-    ::Perspective::View::MockClass.has_binding?( :some_text ).should == true
-    ::Perspective::View::MockClass.has_binding?( :some_numbers ).should == true
+    ::Perspective::View::MockClass.__has_binding__?( :some_binding ).should == true
+    ::Perspective::View::MockClass.__has_binding__?( :some_text ).should == true
+    ::Perspective::View::MockClass.__has_binding__?( :some_numbers ).should == true
 
-    ::Perspective::View::MockModule2.has_binding?( :some_binding ).should == true
-    ::Perspective::View::MockModule2.has_binding?( :some_text ).should == true
-    ::Perspective::View::MockModule2.has_binding?( :some_numbers ).should == true
+    ::Perspective::View::MockModule2.__has_binding__?( :some_binding ).should == true
+    ::Perspective::View::MockModule2.__has_binding__?( :some_text ).should == true
+    ::Perspective::View::MockModule2.__has_binding__?( :some_numbers ).should == true
 
-    ::Perspective::View::MockClass2.has_binding?( :some_binding ).should == true
-    ::Perspective::View::MockClass2.has_binding?( :some_text ).should == true
-    ::Perspective::View::MockClass2.has_binding?( :some_numbers ).should == true
+    ::Perspective::View::MockClass2.__has_binding__?( :some_binding ).should == true
+    ::Perspective::View::MockClass2.__has_binding__?( :some_text ).should == true
+    ::Perspective::View::MockClass2.__has_binding__?( :some_numbers ).should == true
     
   end
   

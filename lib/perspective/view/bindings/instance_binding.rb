@@ -1,8 +1,9 @@
 
 module ::Perspective::View::Bindings::InstanceBinding
   
-  include ::Perspective::Bindings::InstanceBinding::Interface
+  include ::Perspective::Bindings::InstanceBinding::InstanceBindingInterface
   include ::Perspective::View::Configuration
+  include ::Perspective::View::ObjectAndBindingInstance
 
   ###############
   #  view       #
@@ -18,8 +19,6 @@ module ::Perspective::View::Bindings::InstanceBinding
   alias_method :view=, :__view__=
 
 	########################
-	#  render_value        #
-	#  autobind_value      #
 	#  __render_value__    #
 	#  __autobind_value__  #
 	########################
@@ -30,22 +29,21 @@ module ::Perspective::View::Bindings::InstanceBinding
     
   end
   
-  alias_method  :autobind_value, :__autobind_value__
   alias_method  :__render_value__, :__autobind_value__
-  alias_method  :render_value, :__render_value__
 
-  #########################
-  #  render_value_valid?  #
-  #########################
+  #############################
+  #  __render_value_valid__?  #
+  #############################
 
-  def render_value_valid?( ensure_valid = false, view_rendering_empty = false )
+  def __render_value_valid__?( ensure_valid = false, 
+                               view_rendering_empty = @__view_rendering_empty__ )
     
     render_value_valid = true
 
     if __required__? and ! view_rendering_empty and __value__.nil?
       render_value_valid = false
     elsif view = __view__
-      render_value_valid = view.render_value_valid?( ensure_valid, view_rendering_empty )
+      render_value_valid = view.__render_value_valid__?( ensure_valid, view_rendering_empty )
     end
 
     if ensure_valid and ! render_value_valid

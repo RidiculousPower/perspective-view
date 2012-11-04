@@ -3,26 +3,7 @@ module ::Perspective::View::ObjectInstance
 
   include ::Perspective::Bindings::Container::ObjectInstance
   include ::Perspective::View::Configuration
-  
-  ######################
-  #  rendering_empty!  #
-  ######################
-  
-  def rendering_empty!
-    
-    @__view_rendering_empty__ = true
-    
-  end
-  
-  ######################
-  #  rendering_empty?  #
-  ######################
-  
-  def rendering_empty?
-    
-    return @__view_rendering_empty__ ||= false
-    
-  end
+  include ::Perspective::View::ObjectAndBindingInstance
 
 	##############################
   #  __render_binding_order__  #
@@ -30,7 +11,7 @@ module ::Perspective::View::ObjectInstance
   
 	def __render_binding_order__
 		
-		render_value_valid?( true, @__view_rendering_empty__ )
+		__render_value_valid__?( true, @__view_rendering_empty__ )
 
 		child_nodes = [ ]
 		
@@ -49,10 +30,10 @@ module ::Perspective::View::ObjectInstance
 	end
 
   #########################
-  #  render_value_valid?  #
+  #  __render_value_valid__?  #
   #########################
 
-  def render_value_valid?( ensure_valid = false, view_rendering_empty = @__view_rendering_empty__ )
+  def __render_value_valid__?( ensure_valid = false, view_rendering_empty = @__view_rendering_empty__ )
     
     render_value_valid = true
     
@@ -60,7 +41,7 @@ module ::Perspective::View::ObjectInstance
 
       __bindings__.each do |this_binding_name, this_binding_instance|
         
-        render_value_valid = this_binding_instance.render_value_valid?( ensure_valid, 
+        render_value_valid = this_binding_instance.__render_value_valid__?( ensure_valid, 
                                                                         view_rendering_empty )
 
         break unless render_value_valid

@@ -15,32 +15,23 @@ module ::Perspective::View::Configuration
 	  #  child_pre_set_hook  #
 	  #======================#
 
-	  def child_pre_set_hook( index, binding_name, is_insert, parent_instance )
+	  def child_pre_set_hook( index, binding_name_or_instance, is_insert, parent_hash )
       
       child_instance = nil
 
-      case instance = configuration_instance
+      case binding_name_or_instance
         
-        when ::Perspective::View::ObjectInstance
-          
-          case binding_name
-            
-            when ::Symbol, ::String
+        when ::Symbol, ::String
 
-              child_instance = instance.__binding__( binding_name )
+          child_instance = configuration_instance.__binding__( binding_name_or_instance )
 
-            when ::Perspective::Bindings::InstanceBinding
+        when ::Perspective::Bindings::ClassBinding,
+             ::Perspective::Bindings::InstanceBinding
 
-              child_instance = binding_name
-            
-          end
-
-        else
-
-          child_instance = binding_name
+          child_instance = configuration_instance.__binding__( binding_name_or_instance.__name__ )
           
       end
-
+      
       return child_instance
       
 	  end

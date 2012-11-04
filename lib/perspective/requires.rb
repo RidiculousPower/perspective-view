@@ -8,6 +8,7 @@ files = [
   'attributes/view',
   
   'configuration',
+  'object_and_binding_instance',
   
   'bindings/class_binding',
   'bindings/class_binding/class_instance',

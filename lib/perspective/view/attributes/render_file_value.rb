@@ -22,8 +22,6 @@ module ::Perspective::View::Attributes::RenderFileValue
     
   end
   
-  alias_method  :autobind_value, :__autobind_value__
   alias_method  :__render_value__, :__autobind_value__
-  alias_method  :render_value, :__render_value__
 
 end

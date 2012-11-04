@@ -59,7 +59,7 @@ module ::Perspective::View::ClassInstance
 	
 	def __validate_binding_name_for_order__( binding_name )
 	  
-	  unless has_binding?( binding_name )
+	  unless __has_binding__?( binding_name )
   		raise ::Perspective::Bindings::Exception::NoBindingError.new( self, binding_name )
     end
 	  
