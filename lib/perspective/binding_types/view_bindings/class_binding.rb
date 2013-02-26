@@ -1,21 +1,28 @@
 
-module ::Perspective::View::Bindings::ClassBinding
-
-  include ::Perspective::Bindings::ClassBinding::ObjectInstance
-  include ::Perspective::View::Configuration
-  include ::Perspective::View::ObjectAndBindingInstance
+module ::Perspective::BindingTypes::ViewBindings::ClassBinding
   
+  ####################
+  #  __view_class__  #
+  ####################
+
+  alias_method :__view_class__, :__container_class__
+
   #####################
-  #  view_class       #
-  #  view_class=      #
-  #  __view_class__   #
   #  __view_class__=  #
   #####################
   
-  alias_method :__view_class__, :__container_class__
   alias_method :__view_class__=, :__container_class__=
 
+  ################
+  #  view_class  #
+  ################
+
   alias_method :view_class, :__view_class__
+
+  #################
+  #  view_class=  #
+  #################
+
   alias_method :view_class=, :__view_class__=
   
   ##################################
@@ -39,5 +46,17 @@ module ::Perspective::View::Bindings::ClassBinding
     # implementation provided by including class/subclass or later included modules
     
   end
-  
+
+  ################
+  #  __render__  #
+  ################
+
+  alias_method :__render__, :__configure__
+
+  ############
+  #  render  #
+  ############
+
+  alias_method :render, :__render__
+
 end

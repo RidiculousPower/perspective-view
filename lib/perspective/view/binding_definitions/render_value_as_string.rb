@@ -1,10 +1,7 @@
 
-module ::Perspective::View::Attributes::RenderValueAsString
+module ::Perspective::View::BindingDefinitions::RenderValueAsString
 
 	########################
-	#  render_value        #
-	#  autobind_value      #
-	#  __render_value__    #
 	#  __autobind_value__  #
 	########################
 	
@@ -13,6 +10,10 @@ module ::Perspective::View::Attributes::RenderValueAsString
     return current_value.to_s
     
   end
+
+	######################
+	#  __render_value__  #
+	######################
   
   alias_method  :__render_value__, :__autobind_value__
 

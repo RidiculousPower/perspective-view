@@ -1,6 +1,4 @@
 
-begin ; require 'development' ; rescue ::LoadError ; end
-
 require 'perspective/bindings'
 
 # namespaces that have to be declared ahead of time for proper load order
@@ -21,6 +19,6 @@ module ::Perspective::View
 	include ::Perspective::View::ObjectInstance
   
   cascade = cluster( :perspective ).before_include_or_extend.cascade
-  cascade.extend( ::Perspective::View::ClassInstance )
+  cascade.extend( ::Perspective::View::SingletonInstance )
 
 end

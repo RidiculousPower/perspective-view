@@ -1,10 +1,7 @@
 
-module ::Perspective::View::Attributes::RenderFileValue
+module ::Perspective::View::BindingDefinitions::RenderFileValue
 
 	########################
-	#  render_value        #
-	#  autobind_value      #
-	#  __render_value__    #
 	#  __autobind_value__  #
 	########################
 	
@@ -21,6 +18,10 @@ module ::Perspective::View::Attributes::RenderFileValue
     return rendered_binding_value
     
   end
+
+	######################
+	#  __render_value__  #
+	######################
   
   alias_method  :__render_value__, :__autobind_value__
 

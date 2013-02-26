@@ -1,12 +1,12 @@
 
-module ::Perspective::Bindings::AttributeContainer::AbstractView::ClassBinding
-  include ::Perspective::View::Bindings::ClassBinding
+module ::Perspective::Bindings::BindingTypeContainer::AbstractView::ClassBinding
+  include ::Perspective::View::Bindings::BindingBase::ClassBinding
 end
 
-class ::Perspective::Bindings::ClassBinding
-  extend ::Perspective::View::Bindings::ClassBinding::ClassInstance
+class ::Perspective::Bindings::BindingBase::ClassBinding
+  extend ::Perspective::View::Bindings::BindingBase::ClassBinding::SingletonInstance
 end
 
-module ::Perspective::Bindings::AttributeContainer::AbstractView::InstanceBinding
-  include ::Perspective::View::Bindings::InstanceBinding
+module ::Perspective::Bindings::BindingTypeContainer::AbstractView::InstanceBinding
+  include ::Perspective::View::Bindings::BindingBase::InstanceBinding
 end

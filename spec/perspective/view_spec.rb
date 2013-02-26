@@ -13,7 +13,7 @@ describe ::Perspective::View do
       attr_text  :some_other_view
       attr_text :some_third_views
 
-      is_a?( ::Perspective::View::ClassInstance ).should == true
+      is_a?( ::Perspective::View::SingletonInstance ).should == true
       ancestors.include?( ::Perspective::View::ObjectInstance ).should == true
 
     end

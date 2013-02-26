@@ -1,5 +1,5 @@
 
-module ::Perspective::View::ObjectAndBindingInstance
+module ::Perspective::View::ObjectAndInstanceBinding
 
   ##########################
   #  __rendering_empty__!  #

@@ -1,7 +1,5 @@
 
 module ::Perspective::View
-  module Attributes
-  end
-  module Bindings
+  module BindingDefinitions
   end
 end
