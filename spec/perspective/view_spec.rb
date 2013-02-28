@@ -1,153 +1,386 @@
 
 require_relative '../../lib/perspective/view.rb'
 
+require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/container_and_bindings_spec/container_and_bindings_test_setup.rb'
+require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/container_and_bindings_spec/container_and_bindings.rb'
+
 describe ::Perspective::View do
 
-  before :all do
-    
-    class ::Perspective::View::Mock
-      
-      include ::Perspective::View
-      
-      attr_text  :some_text
-      attr_text  :some_other_view
-      attr_text :some_third_views
-
-      is_a?( ::Perspective::View::SingletonInstance ).should == true
-      ancestors.include?( ::Perspective::View::ObjectInstance ).should == true
-
-    end
-    
-  end
-
-	#########################################
-  #  binding_order                        #
-  #  __binding_order__                    #
-  #  attr_order                           #
-  #  __validate_binding_name_for_order__  #
-  #  binding_order_declared_empty?        #
-  #  __binding_order_declared_empty__?    #
-  #  __rendering_empty__!                     #
-  #  __rendering_empty__?                     #
-  #  __render_binding_order__             #
-	#########################################
-
-  it 'can order bindings in sequence and render the binding order, returning a stack of rendered "nodes", which can be arbitrarily defined so long as they stack in an array' do
-    ::Perspective::View.instance_method( :binding_order ).should == ::Perspective::View.instance_method( :__binding_order__ )
-    ::Perspective::View::ObjectInstance.instance_method( :binding_order ).should == ::Perspective::View::ObjectInstance.instance_method( :__binding_order__ )
-
-    class ::Perspective::View::Mock
-      
-      __binding_order__.is_a?( ::Array ).should == true
-
-      attr_binding :first_binding, :second_binding
-
-      attr_order :first_binding, :second_binding
-
-      __binding_order__.should == [ :first_binding, :second_binding ]
-
-    end
-
-    Proc.new { ::Perspective::View::Mock.attr_order :first_binding, :third_binding }.should raise_error( ::Perspective::Bindings::Exception::NoBindingError )
-
-    class ::Perspective::View::Mock
-
-      attr_binding :third_binding
-
-    end
-
-    class ::Perspective::View::Mock
-
-      attr_order :first_binding, :third_binding
-
-      __binding_order__.should == [ :first_binding, :third_binding ]
-
-      __binding_order__.insert( 1, :second_binding )
-
-      __binding_order__.should == [ :first_binding, :second_binding, :third_binding ]
-
-      attr_order :third_binding
-
-      __binding_order__.should == [ :third_binding ]
-
-      attr_order :first_binding, :second_binding, :third_binding
-
-      __binding_order__.should == [ :first_binding, :second_binding, :third_binding ]
-      
-    end
-    
-    instance = ::Perspective::View::Mock.new
-    
-    instance.__rendering_empty__?.should == false
-    instance.__rendering_empty__!
-    instance.__rendering_empty__?.should == true
-    instance.__binding_order__.should == [ instance.__binding__( :first_binding ),
-                                           instance.__binding__( :second_binding ),
-                                           instance.__binding__( :third_binding ) ]
-    
-  end
-
-  #############################
-  #  __render_value_valid__?  #
-  #############################
+  let( :bindings_module ) { ::Perspective::View }
+  setup_container_and_bindings_tests  
   
-  it 'can run a check just before render-time to ensure value is valid for rendering' do
-    
-    class ::Perspective::View::Mock
-    
-      attr_text :some_binding
-      attr_required_text :some_required_binding
+  it_behaves_like :container_and_bindings
 
+  describe ::Perspective::BindingTypes::ViewBindings::ClassBinding do
+
+    ####################
+    #  __view_class__  #
+    ####################
+    
+    context '#__view_class__' do
+      it 'is an alias for #__container_class__' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__view_class__ ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__container_class__ )
+      end
     end
     
-    Proc.new { ::Perspective::View::Mock.new.__render_value_valid__?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
+    #####################
+    #  __view_class__=  #
+    #####################
 
-    instance = ::Perspective::View::Mock.new
-    
-    instance.some_required_binding = :some_value
+    context '#__view_class__=' do
+      it 'is an alias for #__container_class__=' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__view_class__= ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__container_class__= )
+      end
+    end
 
-    Proc.new { instance.__render_value_valid__?( true ) }.should_not raise_error
-    
+    ################
+    #  view_class  #
+    ################
+
+    context '#view_class' do
+      it 'is an alias for #__view_class__' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :view_class ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__view_class__ )
+      end
+    end
+
+    #################
+    #  view_class=  #
+    #################
+
+    context '#view_class=' do
+      it 'is an alias for #__view_class__=' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :view_class= ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__view_class__= )
+      end
+    end
+
+    #############################
+    #  __validate_view_class__  #
+    #############################
+
+    context '#__validate_view_class__' do
+      it 'does nothing, defined by implementing classes' do
+        class_instance.a.__validate_view_class__( ::Object )
+      end
+    end
+
+    ##################################
+    #  __validate_container_class__  #
+    ##################################
+
+    context '#__validate_container_class__' do
+      let( :block_state ) { ::BlockState.new }
+      let( :action ) { _block_state = block_state ; _block_state.block = ::Proc.new { |*args| _block_state.block_ran! } }
+      let( :instance ) do
+        instance = class_instance
+        called_validate = false
+        instance.a.define_singleton_method( :__validate_view_class__, & action )
+        instance
+      end
+      it 'adds a call to #__validate_view_class__' do
+        instance.a.__validate_container_class__( instance.a.__container_class__ )
+        block_state.block_ran?.should be true
+      end
+    end
+
+    ################
+    #  __render__  #
+    ################
+
+    context '#__render__' do
+      it 'is an alias for #__configure__' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__render__ ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__configure__ )
+      end
+    end
+
+    ############
+    #  render  #
+    ############
+
+    context '#render' do
+      it 'is an alias for #__render__' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :render ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :__render__ )
+      end
+    end
+
   end
 
-  it 'can cascade definitions' do
+  describe ::Perspective::BindingTypes::ViewBindings::InstanceBinding do
 
-    module ::Perspective::View::MockModule
-      include ::Perspective::View
-      attr_binding :some_binding
-      attr_text :some_text
-      attr_numbers :some_numbers
+    ##############
+    #  __view__  #
+    ##############
+
+    context '#__view__' do
+      it 'is an alias for #__container__' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__view__ ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__container__ )
+      end
     end
 
-    class ::Perspective::View::MockClass
-      include ::Perspective::View::MockModule
+    ###############
+    #  __view__=  #
+    ###############
+
+    context '#__view__=' do
+      it 'is an alias for #__container__=' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__view__= ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__container__= )
+      end
     end
 
-    module ::Perspective::View::MockModule2
-      include ::Perspective::View::MockModule
+    ###########
+    #  view   #
+    ###########
+
+    context '#view' do
+      it 'is an alias for #__view__' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :view ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__view__ )
+      end
     end
 
-    class ::Perspective::View::MockClass2
-      include ::Perspective::View::MockModule2
+    ###########
+    #  view=  #
+    ###########
+
+    context '#view=' do
+      it 'is an alias for #__view__=' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :view= ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__view__= )
+      end
     end
 
-    ::Perspective::View::MockModule.__has_binding__?( :some_binding ).should == true
-    ::Perspective::View::MockModule.__has_binding__?( :some_text ).should == true
-    ::Perspective::View::MockModule.__has_binding__?( :some_numbers ).should == true
-    
-    ::Perspective::View::MockClass.__has_binding__?( :some_binding ).should == true
-    ::Perspective::View::MockClass.__has_binding__?( :some_text ).should == true
-    ::Perspective::View::MockClass.__has_binding__?( :some_numbers ).should == true
+    ######################
+  	#  __render_value__  #
+  	######################
 
-    ::Perspective::View::MockModule2.__has_binding__?( :some_binding ).should == true
-    ::Perspective::View::MockModule2.__has_binding__?( :some_text ).should == true
-    ::Perspective::View::MockModule2.__has_binding__?( :some_numbers ).should == true
+    context '#__render_value__' do
+      it 'is an alias for #__value__' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__render_value__ ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__value__ )
+      end
+    end
 
-    ::Perspective::View::MockClass2.__has_binding__?( :some_binding ).should == true
-    ::Perspective::View::MockClass2.__has_binding__?( :some_text ).should == true
-    ::Perspective::View::MockClass2.__has_binding__?( :some_numbers ).should == true
-    
+    ####################################
+    #  __required_bindings_present__?  #
+    ####################################
+
+    context '#__required_bindings_present__' do
+      context 'when ensure_present is false' do
+        it 'will return whether all required bindings have values' do
+          instance_of_class.a.__required_bindings_present__?.should be true
+          instance_of_class.a.b.__required__ = true
+          instance_of_class.a.__required_bindings_present__?.should be false
+        end
+      end
+      context 'when ensure_present is true' do
+        it 'will raise an exception if all required bindings do not have values' do
+          instance_of_class.a.__required_bindings_present__?( true ).should be true
+          instance_of_class.a.b.__required__ = true
+          ::Proc.new { instance_of_class.a.__required_bindings_present__?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
+        end
+      end
+    end
+
+    ####################
+    #  __view_count__  #
+    ####################
+
+    context '#__view_count__' do
+      it 'is an alias for #__container_count__' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__view_count__ ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :__container_count__ )
+      end
+    end
+
+    ######################
+    #  rendering_empty!  #
+    ######################
+
+    context '#rendering_empty!' do
+      it 'declare that required bindings should not be required for the next render' do
+        instance_of_class.a.instance_variable_get( :@__view_rendering_empty__ ).should be nil
+        instance_of_class.a.rendering_empty!
+        instance_of_class.a.instance_variable_get( :@__view_rendering_empty__ ).should be true
+      end
+    end
+
+    ##########################
+    #  __rendering_empty__?  #
+    ##########################
+
+    context '#__rendering_empty__?' do
+      it 'query whether required bindings should be required for the next render' do
+        instance_of_class.a.__rendering_empty__?.should be false
+        instance_of_class.a.rendering_empty!
+        instance_of_class.a.__rendering_empty__?.should be true
+      end    
+    end
+
   end
-  
+
+	##################
+  #  ::attr_order  #
+  ##################
+
+  context '::attr_order' do
+    context 'when no binding_order exists' do
+      it 'will set order to empty if no parameters' do
+        class_instance.attr_order
+        class_instance.__binding_order__.should == [ ]
+      end
+      it 'will set order to parameters if parameters are present' do
+        class_instance.attr_order :a, :binding_one, :binding_two
+        class_instance.__binding_order__.should == [ :a, :binding_one, :binding_two ]
+      end
+    end
+    context 'when binding_order exists' do
+      it 'will reset the binding order' do
+        class_instance.attr_order :a, :binding_one, :binding_two
+        class_instance.__binding_order__.should == [ :a, :binding_one, :binding_two ]
+        class_instance.attr_order
+        class_instance.__binding_order__.should == [ ]
+      end
+    end
+  end
+
+	###########################################
+  #  ::__validate_binding_name_for_order__  #
+	###########################################
+
+  context '::__validate_binding_name_for_order__' do
+    it 'ensures that binding exists for name' do
+      class_instance.__validate_binding_name_for_order__( :a )
+      ::Proc.new { class_instance.__validate_binding_name_for_order__( :b ) }.should raise_error( ::Perspective::Bindings::Exception::NoBindingError )
+    end
+  end
+
+  ##################
+  #  ::__render__  #
+  ##################
+
+  context '::__render__' do
+    it 'is an alias for ::__configure__' do
+      ::Perspective::View::SingletonInstance.instance_method( :__render__ ).should == ::Perspective::View::SingletonInstance.instance_method( :__configure__ )
+    end
+  end
+
+  ##############
+  #  ::render  #
+  ##############
+
+  context '::render' do
+    it 'is an alias for ::__render__' do
+      ::Perspective::View::SingletonInstance.instance_method( :render ).should == ::Perspective::View::SingletonInstance.instance_method( :__render__ )
+    end
+  end
+
+  #########################
+  #  ::__binding_order__  #
+  #########################
+
+  context '::__binding_order__' do
+    it 'returns the binding order as set through ::attr_order; permits modification' do
+      class_instance.attr_order :a, :binding_one, :binding_two
+      class_instance.__binding_order__.should == [ :a, :binding_one, :binding_two ]
+    end
+  end
+
+  #######################
+  #  __binding_order__  #
+  #######################
+
+  context '#__binding_order__' do
+    it 'returns the binding order with instances corresponding to ::__binding_order__; permits modification' do
+      class_instance.attr_order :a, :binding_one, :binding_two
+      instance_of_class.__binding_order__.should == [ instance_of_class.a, instance_of_class.binding_one, instance_of_class.binding_two ]
+    end
+  end
+
+  ###################
+  #  binding_order  #
+  ###################
+
+  context '#binding_order' do
+    it 'is an alias for ::__binding_order__' do
+      ::Perspective::View::ObjectInstance.instance_method( :binding_order ).should == ::Perspective::View::ObjectInstance.instance_method( :__binding_order__ )
+    end
+  end
+
+  ######################
+  #  rendering_empty!  #
+  ######################
+
+  context '#rendering_empty!' do
+    it 'declare that required bindings should not be required for the next render' do
+      instance_of_class.binding_order_declared_empty?.should be false
+      instance_of_class.rendering_empty!
+      instance_of_class.binding_order_declared_empty?.should be true
+    end
+  end
+
+  ##########################
+  #  __rendering_empty__?  #
+  ##########################
+
+  context '#__rendering_empty__?' do
+    it 'query whether required bindings should be required for the next render' do
+      instance_of_class.__rendering_empty__?.should be false
+      instance_of_class.rendering_empty!
+      instance_of_class.__rendering_empty__?.should be true
+    end    
+  end
+
+  ###################################
+  #  binding_order_declared_empty?  #
+  ###################################
+
+  context '#binding_order_declared_empty?' do
+    it 'reports whether required bindings should be validated' do
+      instance_of_class.binding_order_declared_empty?.should be false
+    end
+  end
+
+  #######################################
+  #  __binding_order_declared_empty__=  #
+  #######################################
+
+  context '#__binding_order_declared_empty__=' do
+    it 'set whether required bindings should be validated (if declared empty, they will not be required)' do
+      instance_of_class.rendering_empty!
+      instance_of_class.binding_order_declared_empty?.should be true
+    end
+  end
+
+  ####################################
+  #  __required_bindings_present__?  #
+  ####################################
+
+  context '#__required_bindings_present__?' do
+    context 'when ensure_present is false' do
+      it 'will return whether all required bindings have values' do
+        instance_of_class.__required_bindings_present__?.should be true
+        instance_of_class.a.__required__ = true
+        instance_of_class.__required_bindings_present__?.should be false
+      end
+    end
+    context 'when ensure_present is true' do
+      it 'will raise an exception if all required bindings do not have values' do
+        instance_of_class.__required_bindings_present__?( true ).should be true
+        instance_of_class.a.__required__ = true
+        ::Proc.new { instance_of_class.__required_bindings_present__?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
+      end
+    end
+  end
+
+	##############################
+  #  __render_binding_order__  #
+  ##############################
+
+  context '#__render_binding_order__' do
+    it 'compiles a list of render values corresponding to each binding; intended for more advanced rendering implemented by later binding/container types' do
+      class_instance.attr_order :binding_one, :binding_two, :content
+      instance_of_class.binding_one.value = :binding_one_value
+      instance_of_class.binding_two.value = :binding_two_value
+      instance_of_class.content.value = :content_value
+      instance_of_class.a.b.c.content.value = :c_content_value
+      instance_of_class.__render_binding_order__.should == [:binding_one_value, :binding_two_value, :content_value]
+    end
+  end
+
 end
 

@@ -1,6 +1,9 @@
 
 module ::Perspective::View::SingletonInstance
-    
+  
+  include ::Perspective::Bindings::Container::SingletonInstance
+  include ::Perspective::BindingTypes::ViewBindings
+  
 	################
   #  attr_order  #
   ################
@@ -15,7 +18,8 @@ module ::Perspective::View::SingletonInstance
 		     binding_order_array[ 0 ].empty? )
 		
       self.__binding_order_declared_empty__ = true
-		
+		  __binding_order__.clear
+		  
 		else
 
       self.__binding_order_declared_empty__ = false

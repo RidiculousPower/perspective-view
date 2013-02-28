@@ -2,7 +2,6 @@
 module ::Perspective::View::ObjectInstance
 
   include ::Perspective::Bindings::Container::ObjectInstance
-  include ::Perspective::View::ObjectAndInstanceBinding
 
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array
@@ -24,8 +23,13 @@ module ::Perspective::View::ObjectInstance
       case binding_name_or_instance
         
         when ::Symbol, ::String
-
-          child_instance = configuration_instance.__binding__( binding_name_or_instance )
+          
+          case instance = configuration_instance
+            when ::Perspective::View::ObjectInstance
+              child_instance = instance.__binding__( binding_name_or_instance )
+            else
+              child_instance = binding_name_or_instance
+          end
 
         when ::Perspective::Bindings::BindingBase::ClassBinding,
              ::Perspective::Bindings::BindingBase::InstanceBinding
@@ -44,51 +48,87 @@ module ::Perspective::View::ObjectInstance
   #  binding_order  #
   ###################
 
-  alias_method :binding_order, :__binding_order__
+  Controller.alias_module_and_instance_methods :binding_order, :__binding_order__
+  
+  ###################################
+  #  binding_order_declared_empty?  #
+  ###################################
+  
+  ###
+  #
+  #
+  attr_configuration  :binding_order_declared_empty? => :__binding_order_declared_empty__=
+  
+  ####################################################
+  #  binding_order_declared_empty?  Default Setting  #
+  ####################################################
+  
+  self.__binding_order_declared_empty__ = false
   
   #######################################
-  #  binding_order_declared_empty?      #
   #  __binding_order_declared_empty__=  #
   #######################################
-  
-  attr_configuration  :binding_order_declared_empty? => :__binding_order_declared_empty__=
 
+  ###
+  #
+  #
+  
+  ######################
+  #  rendering_empty!  #
+  ######################
+  
+  def rendering_empty!
+    
+    self.__binding_order_declared_empty__ = true
+    
+    return self
+    
+  end
+  
+  ##########################
+  #  __rendering_empty__?  #
+  ##########################
+  
+  def __rendering_empty__?
+    
+    return binding_order_declared_empty?
+    
+  end
+  
 	##############################
   #  __render_binding_order__  #
   ##############################
   
 	def __render_binding_order__
 		
-		__render_value_valid__?( true, @__view_rendering_empty__ )
+		__required_bindings_present__?( true, binding_order_declared_empty? )
 
 		child_nodes = [ ]
 		
 		__binding_order__.each do |this_binding|
-		  
 		  if result_node = this_binding.__render_value__
 		    child_nodes.push( result_node )
 	    end
-	    
 		end
 		
-    @__view_rendering_empty__ = false
+    self.__binding_order_declared_empty__ = false
 		    
     return child_nodes
     
 	end
 
-  #############################
-  #  __render_value_valid__?  #
-  #############################
+  ####################################
+  #  __required_bindings_present__?  #
+  ####################################
 
-  def __render_value_valid__?( ensure_valid = false, view_rendering_empty = @__view_rendering_empty__ )
+  def __required_bindings_present__?( ensure_present = false, view_rendering_empty = binding_order_declared_empty? )
     
     render_value_valid = true
     
     unless view_rendering_empty
 
       __bindings__.each do |this_binding_name, this_binding|
-        render_value_valid = this_binding.__render_value_valid__?( ensure_valid, view_rendering_empty )
+        render_value_valid = this_binding.__required_bindings_present__?( ensure_present, view_rendering_empty )
         break unless render_value_valid
       end
 

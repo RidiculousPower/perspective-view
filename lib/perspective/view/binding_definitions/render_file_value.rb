@@ -1,28 +1,27 @@
 
 module ::Perspective::View::BindingDefinitions::RenderFileValue
 
-	########################
-	#  __autobind_value__  #
-	########################
+	######################
+	#  __render_value__  #
+	######################
 	
-	def __autobind_value__
+	def __render_value__( current_value = __value__ )
 	  
 	  rendered_binding_value = nil
 	  
-    if ::Perspective::Configuration.files.by_path?          
-      rendered_binding_value = ::File.path
-    else
-      rendered_binding_value = ::File.readlines.join
-    end
+	  case current_value
+  	  when ::File
+        if ::Perspective::Configuration.files.by_path?          
+          rendered_binding_value = current_value.to_path
+        else
+          rendered_binding_value = current_value.readlines.join
+        end
+      else
+        rendered_binding_value = super( current_value )
+	  end
     
     return rendered_binding_value
     
   end
-
-	######################
-	#  __render_value__  #
-	######################
-  
-  alias_method  :__render_value__, :__autobind_value__
 
 end

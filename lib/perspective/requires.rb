@@ -1,14 +1,10 @@
 
 files = [
-  
-  'view/object_and_instance_binding',
-  
+    
   'view/binding_definitions/render_file_value',
   'view/binding_definitions/render_value_as_string',
   'view/binding_definitions/view',
   
-  'view/object_and_instance_binding',
-
   'binding_types/view',
 
   'binding_types/view_bindings',
