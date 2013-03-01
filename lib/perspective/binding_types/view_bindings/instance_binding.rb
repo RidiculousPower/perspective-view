@@ -31,25 +31,35 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
   
   alias_method  :__render_value__, :__value__
 
-  ####################################
-  #  __required_bindings_present__?  #
-  ####################################
+  ################################
+  #  required_bindings_present?  #
+  ################################
 
-  def __required_bindings_present__?( ensure_present = false, view_rendering_empty = @__view_rendering_empty__ )
+  def required_bindings_present?
     
     render_value_valid = true
 
-    if __required__? and ! view_rendering_empty and __value__.nil?
+    if required? and __value__.nil?
       render_value_valid = false
     elsif view = __view__
-      render_value_valid = view.__required_bindings_present__?( ensure_present, view_rendering_empty )
+      render_value_valid = view.required_bindings_present?
     end
 
-    if ensure_present and ! render_value_valid
+    return render_value_valid
+    
+  end
+  
+  #######################################
+  #  ensure_required_bindings_present!  #
+  #######################################
+  
+  def ensure_required_bindings_present!
+    
+    unless rendering_empty? or required_bindings_present?
       raise ::Perspective::Bindings::Exception::BindingRequired.new( self )
     end
     
-    return render_value_valid
+    return self
     
   end
   
@@ -69,11 +79,11 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
     
   end
   
-  ##########################
-  #  __rendering_empty__?  #
-  ##########################
+  ######################
+  #  rendering_empty?  #
+  ######################
   
-  def __rendering_empty__?
+  def rendering_empty?
     
     return @__view_rendering_empty__ ||= false
     

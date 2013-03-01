@@ -22,10 +22,10 @@ describe ::Perspective::View::BindingDefinitions::View do
   let( :view_instance ) { view_instance_class.new }
 
   ##############################
-  #  __binding_value_valid__?  #
+  #  binding_value_valid?  #
   ##############################
   
-  context '#__binding_value_valid__?' do
+  context '#binding_value_valid?' do
     context 'when value is a Perspective::View' do
       it( 'will match instances of Classes that have included Perspective::View' ) { should match_types( view_instance ) }
     end

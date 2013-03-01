@@ -86,10 +86,10 @@ module ::Perspective::View::ObjectInstance
   end
   
   ##########################
-  #  __rendering_empty__?  #
+  #  rendering_empty?  #
   ##########################
   
-  def __rendering_empty__?
+  def rendering_empty?
     
     return binding_order_declared_empty?
     
@@ -101,7 +101,7 @@ module ::Perspective::View::ObjectInstance
   
 	def __render_binding_order__
 		
-		__required_bindings_present__?( true, binding_order_declared_empty? )
+		ensure_required_bindings_present!
 
 		child_nodes = [ ]
 		
@@ -117,25 +117,35 @@ module ::Perspective::View::ObjectInstance
     
 	end
 
-  ####################################
-  #  __required_bindings_present__?  #
-  ####################################
+  ################################
+  #  required_bindings_present?  #
+  ################################
 
-  def __required_bindings_present__?( ensure_present = false, view_rendering_empty = binding_order_declared_empty? )
+  def required_bindings_present?
     
     render_value_valid = true
     
-    unless view_rendering_empty
-
-      __bindings__.each do |this_binding_name, this_binding|
-        render_value_valid = this_binding.__required_bindings_present__?( ensure_present, view_rendering_empty )
-        break unless render_value_valid
-      end
-
-	  end
+    __bindings__.each do |this_binding_name, this_binding|
+      render_value_valid = this_binding.required_bindings_present?
+      break unless render_value_valid
+    end
     
     return render_value_valid
     
   end
 
+  #######################################
+  #  ensure_required_bindings_present!  #
+  #######################################
+  
+  def ensure_required_bindings_present!
+    
+    __bindings__.each do |this_binding_name, this_binding|
+      this_binding.ensure_required_bindings_present!
+    end
+    
+    return self
+    
+  end
+  
 end

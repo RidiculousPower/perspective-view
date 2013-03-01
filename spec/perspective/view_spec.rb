@@ -157,22 +157,22 @@ describe ::Perspective::View do
     end
 
     ####################################
-    #  __required_bindings_present__?  #
+    #  required_bindings_present?  #
     ####################################
 
     context '#__required_bindings_present__' do
       context 'when ensure_present is false' do
         it 'will return whether all required bindings have values' do
-          instance_of_class.a.__required_bindings_present__?.should be true
-          instance_of_class.a.b.__required__ = true
-          instance_of_class.a.__required_bindings_present__?.should be false
+          instance_of_class.a.required_bindings_present?.should be true
+          instance_of_class.a.b.required = true
+          instance_of_class.a.required_bindings_present?.should be false
         end
       end
       context 'when ensure_present is true' do
         it 'will raise an exception if all required bindings do not have values' do
-          instance_of_class.a.__required_bindings_present__?( true ).should be true
-          instance_of_class.a.b.__required__ = true
-          ::Proc.new { instance_of_class.a.__required_bindings_present__?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
+          instance_of_class.a.required_bindings_present?( true ).should be true
+          instance_of_class.a.b.required = true
+          ::Proc.new { instance_of_class.a.required_bindings_present?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
         end
       end
     end
@@ -200,14 +200,14 @@ describe ::Perspective::View do
     end
 
     ##########################
-    #  __rendering_empty__?  #
+    #  rendering_empty?  #
     ##########################
 
-    context '#__rendering_empty__?' do
+    context '#rendering_empty?' do
       it 'query whether required bindings should be required for the next render' do
-        instance_of_class.a.__rendering_empty__?.should be false
+        instance_of_class.a.rendering_empty?.should be false
         instance_of_class.a.rendering_empty!
-        instance_of_class.a.__rendering_empty__?.should be true
+        instance_of_class.a.rendering_empty?.should be true
       end    
     end
 
@@ -314,14 +314,14 @@ describe ::Perspective::View do
   end
 
   ##########################
-  #  __rendering_empty__?  #
+  #  rendering_empty?  #
   ##########################
 
-  context '#__rendering_empty__?' do
+  context '#rendering_empty?' do
     it 'query whether required bindings should be required for the next render' do
-      instance_of_class.__rendering_empty__?.should be false
+      instance_of_class.rendering_empty?.should be false
       instance_of_class.rendering_empty!
-      instance_of_class.__rendering_empty__?.should be true
+      instance_of_class.rendering_empty?.should be true
     end    
   end
 
@@ -347,22 +347,22 @@ describe ::Perspective::View do
   end
 
   ####################################
-  #  __required_bindings_present__?  #
+  #  required_bindings_present?  #
   ####################################
 
-  context '#__required_bindings_present__?' do
+  context '#required_bindings_present?' do
     context 'when ensure_present is false' do
       it 'will return whether all required bindings have values' do
-        instance_of_class.__required_bindings_present__?.should be true
-        instance_of_class.a.__required__ = true
-        instance_of_class.__required_bindings_present__?.should be false
+        instance_of_class.required_bindings_present?.should be true
+        instance_of_class.a.required = true
+        instance_of_class.required_bindings_present?.should be false
       end
     end
     context 'when ensure_present is true' do
       it 'will raise an exception if all required bindings do not have values' do
-        instance_of_class.__required_bindings_present__?( true ).should be true
-        instance_of_class.a.__required__ = true
-        ::Proc.new { instance_of_class.__required_bindings_present__?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
+        instance_of_class.required_bindings_present?( true ).should be true
+        instance_of_class.a.required = true
+        ::Proc.new { instance_of_class.required_bindings_present?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
       end
     end
   end
