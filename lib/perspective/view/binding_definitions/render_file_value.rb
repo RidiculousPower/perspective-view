@@ -2,9 +2,9 @@
 
 module ::Perspective::View::BindingDefinitions::RenderFileValue
 
-	######################
+	####################
 	#  «render_value»  #
-	######################
+	####################
 	
 	def «render_value»( current_value = «value» )
 	  

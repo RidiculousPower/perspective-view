@@ -2,15 +2,15 @@
 
 module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
     
-  ##############
+  ############
   #  «view»  #
-  ##############
+  ############
 
   alias_method :«view», :«container»
 
-  ###############
+  #############
   #  «view»=  #
-  ###############
+  #############
 
   alias_method :«view»=, :«container»=
 
@@ -26,9 +26,9 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
 
   alias_method :view=, :«view»=
 
-  ######################
+  ####################
 	#  «render_value»  #
-	######################
+	####################
   
   alias_method  :«render_value», :«value»
 
@@ -64,9 +64,9 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
     
   end
   
-  ####################
+  ##################
   #  «view_count»  #
-  ####################
+  ##################
   
   alias_method :«view_count», :«container_count»
 

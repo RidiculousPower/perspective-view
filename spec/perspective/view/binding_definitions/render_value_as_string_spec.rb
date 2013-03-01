@@ -23,10 +23,10 @@ describe ::Perspective::View::BindingDefinitions::RenderValueAsString do
     binding_instance
   end
   
-  ######################
+  ####################
 	#  «render_value»  #
-	######################
-	
+	####################
+
 	context '#«render_value»' do
 	  it 'will return «value» as a string' do
 	    binding_instance.«render_value».should == binding_instance.«value».to_s

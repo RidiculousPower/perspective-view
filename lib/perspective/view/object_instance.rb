@@ -7,9 +7,9 @@ module ::Perspective::View::ObjectInstance
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array
 
-  #######################
+  #####################
   #  «binding_order»  #
-  #######################
+  #####################
 
   attr_array  :«binding_order» do
 
@@ -66,9 +66,9 @@ module ::Perspective::View::ObjectInstance
   
   self.«binding_order_declared_empty» = false
   
-  ####################################
+  #####################################
   #  «binding_order_declared_empty»=  #
-  ####################################
+  #####################################
 
   ###
   #
@@ -96,9 +96,9 @@ module ::Perspective::View::ObjectInstance
     
   end
   
-	###########################
+	############################
   #  «render_binding_order»  #
-  ###########################
+  ############################
   
 	def «render_binding_order»
 		

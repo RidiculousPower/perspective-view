@@ -2,15 +2,15 @@
 
 module ::Perspective::BindingTypes::ViewBindings::ClassBinding
   
-  ####################
+  ##################
   #  «view_class»  #
-  ####################
+  ##################
 
   alias_method :«view_class», :«container_class»
 
-  #####################
+  ###################
   #  «view_class»=  #
-  #####################
+  ###################
   
   alias_method :«view_class»=, :«container_class»=
 
@@ -26,9 +26,9 @@ module ::Perspective::BindingTypes::ViewBindings::ClassBinding
 
   alias_method :view_class=, :«view_class»=
   
-  ##################################
+  ################################
   #  «validate_container_class»  #
-  ##################################
+  ################################
 
   def «validate_container_class»( container_class )
   
@@ -38,9 +38,9 @@ module ::Perspective::BindingTypes::ViewBindings::ClassBinding
     
   end
 
-  #############################
+  ###########################
   #  «validate_view_class»  #
-  #############################
+  ###########################
 
   def «validate_view_class»( view_class )
     
@@ -48,9 +48,9 @@ module ::Perspective::BindingTypes::ViewBindings::ClassBinding
     
   end
 
-  ################
+  ##############
   #  «render»  #
-  ################
+  ##############
 
   alias_method :«render», :«configure»
 

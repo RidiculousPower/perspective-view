@@ -14,9 +14,9 @@ describe ::Perspective::View do
 
   describe ::Perspective::BindingTypes::ViewBindings::ClassBinding do
 
-    ####################
+    ##################
     #  «view_class»  #
-    ####################
+    ##################
     
     context '#«view_class»' do
       it 'is an alias for #«container_class»' do
@@ -24,9 +24,9 @@ describe ::Perspective::View do
       end
     end
     
-    #####################
+    ###################
     #  «view_class»=  #
-    #####################
+    ###################
 
     context '#«view_class»=' do
       it 'is an alias for #«container_class»=' do
@@ -54,9 +54,9 @@ describe ::Perspective::View do
       end
     end
 
-    #############################
+    ###########################
     #  «validate_view_class»  #
-    #############################
+    ###########################
 
     context '#«validate_view_class»' do
       it 'does nothing, defined by implementing classes' do
@@ -64,9 +64,9 @@ describe ::Perspective::View do
       end
     end
 
-    ##################################
+    ################################
     #  «validate_container_class»  #
-    ##################################
+    ################################
 
     context '#«validate_container_class»' do
       let( :block_state ) { ::BlockState.new }
@@ -83,9 +83,9 @@ describe ::Perspective::View do
       end
     end
 
-    ################
+    ##############
     #  «render»  #
-    ################
+    ##############
 
     context '#«render»' do
       it 'is an alias for #«configure»' do
@@ -107,9 +107,9 @@ describe ::Perspective::View do
 
   describe ::Perspective::BindingTypes::ViewBindings::InstanceBinding do
 
-    ##############
+    ############
     #  «view»  #
-    ##############
+    ############
 
     context '#«view»' do
       it 'is an alias for #«container»' do
@@ -117,9 +117,9 @@ describe ::Perspective::View do
       end
     end
 
-    ###############
+    #############
     #  «view»=  #
-    ###############
+    #############
 
     context '#«view»=' do
       it 'is an alias for #«container»=' do
@@ -147,9 +147,9 @@ describe ::Perspective::View do
       end
     end
 
-    ######################
+    ####################
   	#  «render_value»  #
-  	######################
+  	####################
 
     context '#«render_value»' do
       it 'is an alias for #«value»' do
@@ -157,9 +157,9 @@ describe ::Perspective::View do
       end
     end
 
-    ####################################
+    ################################
     #  required_bindings_present?  #
-    ####################################
+    ################################
 
     context '#«required_bindings_present»' do
       context 'when ensure_present is false' do
@@ -178,9 +178,9 @@ describe ::Perspective::View do
       end
     end
 
-    ####################
+    ##################
     #  «view_count»  #
-    ####################
+    ##################
 
     context '#«view_count»' do
       it 'is an alias for #«container_count»' do
@@ -200,9 +200,9 @@ describe ::Perspective::View do
       end
     end
 
-    ##########################
+    ######################
     #  rendering_empty?  #
-    ##########################
+    ######################
 
     context '#rendering_empty?' do
       it 'query whether required bindings should be required for the next render' do
@@ -239,9 +239,9 @@ describe ::Perspective::View do
     end
   end
 
-	###########################################
+	#########################################
   #  ::«validate_binding_name_for_order»  #
-	###########################################
+	#########################################
 
   context '::«validate_binding_name_for_order»' do
     it 'ensures that binding exists for name' do
@@ -250,9 +250,9 @@ describe ::Perspective::View do
     end
   end
 
-  ##################
+  ################
   #  ::«render»  #
-  ##################
+  ################
 
   context '::«render»' do
     it 'is an alias for ::«configure»' do
@@ -270,9 +270,9 @@ describe ::Perspective::View do
     end
   end
 
-  #########################
+  #######################
   #  ::«binding_order»  #
-  #########################
+  #######################
 
   context '::«binding_order»' do
     it 'returns the binding order as set through ::attr_order; permits modification' do
@@ -281,9 +281,9 @@ describe ::Perspective::View do
     end
   end
 
-  #######################
+  #####################
   #  «binding_order»  #
-  #######################
+  #####################
 
   context '#«binding_order»' do
     it 'returns the binding order with instances corresponding to ::«binding_order»; permits modification' do
@@ -314,9 +314,9 @@ describe ::Perspective::View do
     end
   end
 
-  ##########################
+  ######################
   #  rendering_empty?  #
-  ##########################
+  ######################
 
   context '#rendering_empty?' do
     it 'query whether required bindings should be required for the next render' do
@@ -336,9 +336,9 @@ describe ::Perspective::View do
     end
   end
 
-  #######################################
+  #####################################
   #  «binding_order_declared_empty»=  #
-  #######################################
+  #####################################
 
   context '#«binding_order_declared_empty»=' do
     it 'set whether required bindings should be validated (if declared empty, they will not be required)' do
@@ -347,9 +347,9 @@ describe ::Perspective::View do
     end
   end
 
-  ####################################
+  ################################
   #  required_bindings_present?  #
-  ####################################
+  ################################
 
   context '#required_bindings_present?' do
     context 'when ensure_present is false' do
@@ -368,9 +368,9 @@ describe ::Perspective::View do
     end
   end
 
-	##############################
+	############################
   #  «render_binding_order»  #
-  ##############################
+  ############################
 
   context '#«render_binding_order»' do
     it 'compiles a list of render values corresponding to each binding; intended for more advanced rendering implemented by later binding/container types' do

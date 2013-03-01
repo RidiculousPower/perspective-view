@@ -23,9 +23,9 @@ describe ::Perspective::View::BindingDefinitions::RenderFileValue do
     file_binding
   end
   
-	######################
+	####################
 	#  «render_value»  #
-	######################
+	####################
 
 	context '#«render_value»' do
 	  context 'files by path' do

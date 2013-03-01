@@ -52,9 +52,9 @@ module ::Perspective::View::SingletonInstance
     
   end
 
-	#########################################
+	#######################################
   #  «validate_binding_name_for_order»  #
-	#########################################
+	#######################################
 	
 	def «validate_binding_name_for_order»( binding_name )
 	  
@@ -64,9 +64,9 @@ module ::Perspective::View::SingletonInstance
 	  
   end
 
-  ################
+  ##############
   #  «render»  #
-  ################
+  ##############
 
   alias_method :«render», :«configure»
 
