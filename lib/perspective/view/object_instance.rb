@@ -8,10 +8,10 @@ module ::Perspective::View::ObjectInstance
   include ::CascadingConfiguration::Array
 
   #######################
-  #  «binding_order  #
+  #  «binding_order»  #
   #######################
 
-  attr_array  :«binding_order do
+  attr_array  :«binding_order» do
 
     #======================#
 	  #  child_pre_set_hook  #
@@ -27,7 +27,7 @@ module ::Perspective::View::ObjectInstance
           
           case instance = configuration_instance
             when ::Perspective::View::ObjectInstance
-              child_instance = instance.«binding( binding_name_or_instance )
+              child_instance = instance.«binding»( binding_name_or_instance )
             else
               child_instance = binding_name_or_instance
           end
@@ -35,7 +35,7 @@ module ::Perspective::View::ObjectInstance
         when ::Perspective::Bindings::BindingBase::ClassBinding,
              ::Perspective::Bindings::BindingBase::InstanceBinding
 
-          child_instance = configuration_instance.«binding( binding_name_or_instance.«name )
+          child_instance = configuration_instance.«binding»( binding_name_or_instance.«name» )
           
       end
       
@@ -49,7 +49,7 @@ module ::Perspective::View::ObjectInstance
   #  binding_order  #
   ###################
 
-  Controller.alias_module_and_instance_methods :binding_order, :«binding_order
+  Controller.alias_module_and_instance_methods :binding_order, :«binding_order»
   
   ###################################
   #  binding_order_declared_empty?  #
@@ -58,16 +58,16 @@ module ::Perspective::View::ObjectInstance
   ###
   #
   #
-  attr_configuration  :binding_order_declared_empty? => :«binding_order_declared_empty=
+  attr_configuration  :binding_order_declared_empty? => :«binding_order_declared_empty»=
   
   ####################################################
   #  binding_order_declared_empty?  Default Setting  #
   ####################################################
   
-  self.«binding_order_declared_empty = false
+  self.«binding_order_declared_empty» = false
   
   ####################################
-  #  «binding_order_declared_empty=  #
+  #  «binding_order_declared_empty»=  #
   ####################################
 
   ###
@@ -80,7 +80,7 @@ module ::Perspective::View::ObjectInstance
   
   def rendering_empty!
     
-    self.«binding_order_declared_empty = true
+    self.«binding_order_declared_empty» = true
     
     return self
     
@@ -97,17 +97,17 @@ module ::Perspective::View::ObjectInstance
   end
   
 	###########################
-  #  «render_binding_order  #
+  #  «render_binding_order»  #
   ###########################
   
-	def «render_binding_order
+	def «render_binding_order»
 		
     ensure_required_bindings_present! unless view_rendering_empty
 
 		child_nodes = [ ]
 		
-		«binding_order.each do |this_binding|
-	    child_nodes.push( result_node ) if result_node = this_binding.«render_value
+		«binding_order».each do |this_binding|
+	    child_nodes.push( result_node ) if result_node = this_binding.«render_value»
 		end
 		    
     return child_nodes
@@ -122,7 +122,7 @@ module ::Perspective::View::ObjectInstance
     
     render_value_valid = true
     
-    «bindings.each do |this_name, this_binding|
+    «bindings».each do |this_name, this_binding|
       break unless render_value_valid = this_binding.required_bindings_present?
     end
     
@@ -136,7 +136,7 @@ module ::Perspective::View::ObjectInstance
   
   def ensure_required_bindings_present!
     
-    «bindings.each { |this_name, this_binding| this_binding.ensure_required_bindings_present! }
+    «bindings».each { |this_name, this_binding| this_binding.ensure_required_bindings_present! }
     
     return self
     

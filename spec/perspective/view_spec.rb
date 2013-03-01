@@ -15,22 +15,22 @@ describe ::Perspective::View do
   describe ::Perspective::BindingTypes::ViewBindings::ClassBinding do
 
     ####################
-    #  «view_class  #
+    #  «view_class»  #
     ####################
     
-    context '#«view_class' do
-      it 'is an alias for #«container_class' do
-        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«view_class ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«container_class )
+    context '#«view_class»' do
+      it 'is an alias for #«container_class»' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«view_class» ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«container_class» )
       end
     end
     
     #####################
-    #  «view_class=  #
+    #  «view_class»=  #
     #####################
 
-    context '#«view_class=' do
-      it 'is an alias for #«container_class=' do
-        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«view_class= ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«container_class= )
+    context '#«view_class»=' do
+      it 'is an alias for #«container_class»=' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«view_class»= ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«container_class»= )
       end
     end
 
@@ -39,8 +39,8 @@ describe ::Perspective::View do
     ################
 
     context '#view_class' do
-      it 'is an alias for #«view_class' do
-        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :view_class ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«view_class )
+      it 'is an alias for #«view_class»' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :view_class ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«view_class» )
       end
     end
 
@@ -49,47 +49,47 @@ describe ::Perspective::View do
     #################
 
     context '#view_class=' do
-      it 'is an alias for #«view_class=' do
-        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :view_class= ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«view_class= )
+      it 'is an alias for #«view_class»=' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :view_class= ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«view_class»= )
       end
     end
 
     #############################
-    #  «validate_view_class  #
+    #  «validate_view_class»  #
     #############################
 
-    context '#«validate_view_class' do
+    context '#«validate_view_class»' do
       it 'does nothing, defined by implementing classes' do
-        class_instance.a.«validate_view_class( ::Object )
+        class_instance.a.«validate_view_class»( ::Object )
       end
     end
 
     ##################################
-    #  «validate_container_class  #
+    #  «validate_container_class»  #
     ##################################
 
-    context '#«validate_container_class' do
+    context '#«validate_container_class»' do
       let( :block_state ) { ::BlockState.new }
       let( :action ) { _block_state = block_state ; _block_state.block = ::Proc.new { |*args| _block_state.block_ran! } }
       let( :instance ) do
         instance = class_instance
         called_validate = false
-        instance.a.define_singleton_method( :«validate_view_class, & action )
+        instance.a.define_singleton_method( :«validate_view_class», & action )
         instance
       end
-      it 'adds a call to #«validate_view_class' do
-        instance.a.«validate_container_class( instance.a.«container_class )
+      it 'adds a call to #«validate_view_class»' do
+        instance.a.«validate_container_class»( instance.a.«container_class» )
         block_state.block_ran?.should be true
       end
     end
 
     ################
-    #  «render  #
+    #  «render»  #
     ################
 
-    context '#«render' do
-      it 'is an alias for #«configure' do
-        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«render ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«configure )
+    context '#«render»' do
+      it 'is an alias for #«configure»' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«render» ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«configure» )
       end
     end
 
@@ -98,8 +98,8 @@ describe ::Perspective::View do
     ############
 
     context '#render' do
-      it 'is an alias for #«render' do
-        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :render ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«render )
+      it 'is an alias for #«render»' do
+        ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :render ).should == ::Perspective::BindingTypes::ViewBindings::ClassBinding.instance_method( :«render» )
       end
     end
 
@@ -108,22 +108,22 @@ describe ::Perspective::View do
   describe ::Perspective::BindingTypes::ViewBindings::InstanceBinding do
 
     ##############
-    #  «view  #
+    #  «view»  #
     ##############
 
-    context '#«view' do
-      it 'is an alias for #«container' do
-        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«container )
+    context '#«view»' do
+      it 'is an alias for #«container»' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view» ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«container» )
       end
     end
 
     ###############
-    #  «view=  #
+    #  «view»=  #
     ###############
 
-    context '#«view=' do
-      it 'is an alias for #«container=' do
-        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view= ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«container= )
+    context '#«view»=' do
+      it 'is an alias for #«container»=' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view»= ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«container»= )
       end
     end
 
@@ -132,8 +132,8 @@ describe ::Perspective::View do
     ###########
 
     context '#view' do
-      it 'is an alias for #«view' do
-        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :view ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view )
+      it 'is an alias for #«view»' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :view ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view» )
       end
     end
 
@@ -142,18 +142,18 @@ describe ::Perspective::View do
     ###########
 
     context '#view=' do
-      it 'is an alias for #«view=' do
-        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :view= ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view= )
+      it 'is an alias for #«view»=' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :view= ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view»= )
       end
     end
 
     ######################
-  	#  «render_value  #
+  	#  «render_value»  #
   	######################
 
-    context '#«render_value' do
-      it 'is an alias for #«value' do
-        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«render_value ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«value )
+    context '#«render_value»' do
+      it 'is an alias for #«value»' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«render_value» ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«value» )
       end
     end
 
@@ -161,7 +161,7 @@ describe ::Perspective::View do
     #  required_bindings_present?  #
     ####################################
 
-    context '#«required_bindings_present' do
+    context '#«required_bindings_present»' do
       context 'when ensure_present is false' do
         it 'will return whether all required bindings have values' do
           instance_of_class.a.required_bindings_present?.should be true
@@ -179,12 +179,12 @@ describe ::Perspective::View do
     end
 
     ####################
-    #  «view_count  #
+    #  «view_count»  #
     ####################
 
-    context '#«view_count' do
-      it 'is an alias for #«container_count' do
-        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view_count ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«container_count )
+    context '#«view_count»' do
+      it 'is an alias for #«container_count»' do
+        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«view_count» ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«container_count» )
       end
     end
 
@@ -194,9 +194,9 @@ describe ::Perspective::View do
 
     context '#rendering_empty!' do
       it 'declare that required bindings should not be required for the next render' do
-        instance_of_class.a.instance_variable_get( :@«view_rendering_empty ).should be nil
+        instance_of_class.a.instance_variable_get( :@«view_rendering_empty» ).should be nil
         instance_of_class.a.rendering_empty!
-        instance_of_class.a.instance_variable_get( :@«view_rendering_empty ).should be true
+        instance_of_class.a.instance_variable_get( :@«view_rendering_empty» ).should be true
       end
     end
 
@@ -222,41 +222,41 @@ describe ::Perspective::View do
     context 'when no binding_order exists' do
       it 'will set order to empty if no parameters' do
         class_instance.attr_order
-        class_instance.«binding_order.should == [ ]
+        class_instance.«binding_order».should == [ ]
       end
       it 'will set order to parameters if parameters are present' do
         class_instance.attr_order :a, :binding_one, :binding_two
-        class_instance.«binding_order.should == [ :a, :binding_one, :binding_two ]
+        class_instance.«binding_order».should == [ :a, :binding_one, :binding_two ]
       end
     end
     context 'when binding_order exists' do
       it 'will reset the binding order' do
         class_instance.attr_order :a, :binding_one, :binding_two
-        class_instance.«binding_order.should == [ :a, :binding_one, :binding_two ]
+        class_instance.«binding_order».should == [ :a, :binding_one, :binding_two ]
         class_instance.attr_order
-        class_instance.«binding_order.should == [ ]
+        class_instance.«binding_order».should == [ ]
       end
     end
   end
 
 	###########################################
-  #  ::«validate_binding_name_for_order  #
+  #  ::«validate_binding_name_for_order»  #
 	###########################################
 
-  context '::«validate_binding_name_for_order' do
+  context '::«validate_binding_name_for_order»' do
     it 'ensures that binding exists for name' do
-      class_instance.«validate_binding_name_for_order( :a )
-      ::Proc.new { class_instance.«validate_binding_name_for_order( :b ) }.should raise_error( ::Perspective::Bindings::Exception::NoBindingError )
+      class_instance.«validate_binding_name_for_order»( :a )
+      ::Proc.new { class_instance.«validate_binding_name_for_order»( :b ) }.should raise_error( ::Perspective::Bindings::Exception::NoBindingError )
     end
   end
 
   ##################
-  #  ::«render  #
+  #  ::«render»  #
   ##################
 
-  context '::«render' do
-    it 'is an alias for ::«configure' do
-      ::Perspective::View::SingletonInstance.instance_method( :«render ).should == ::Perspective::View::SingletonInstance.instance_method( :«configure )
+  context '::«render»' do
+    it 'is an alias for ::«configure»' do
+      ::Perspective::View::SingletonInstance.instance_method( :«render» ).should == ::Perspective::View::SingletonInstance.instance_method( :«configure» )
     end
   end
 
@@ -265,30 +265,30 @@ describe ::Perspective::View do
   ##############
 
   context '::render' do
-    it 'is an alias for ::«render' do
-      ::Perspective::View::SingletonInstance.instance_method( :render ).should == ::Perspective::View::SingletonInstance.instance_method( :«render )
+    it 'is an alias for ::«render»' do
+      ::Perspective::View::SingletonInstance.instance_method( :render ).should == ::Perspective::View::SingletonInstance.instance_method( :«render» )
     end
   end
 
   #########################
-  #  ::«binding_order  #
+  #  ::«binding_order»  #
   #########################
 
-  context '::«binding_order' do
+  context '::«binding_order»' do
     it 'returns the binding order as set through ::attr_order; permits modification' do
       class_instance.attr_order :a, :binding_one, :binding_two
-      class_instance.«binding_order.should == [ :a, :binding_one, :binding_two ]
+      class_instance.«binding_order».should == [ :a, :binding_one, :binding_two ]
     end
   end
 
   #######################
-  #  «binding_order  #
+  #  «binding_order»  #
   #######################
 
-  context '#«binding_order' do
-    it 'returns the binding order with instances corresponding to ::«binding_order; permits modification' do
+  context '#«binding_order»' do
+    it 'returns the binding order with instances corresponding to ::«binding_order»; permits modification' do
       class_instance.attr_order :a, :binding_one, :binding_two
-      instance_of_class.«binding_order.should == [ instance_of_class.a, instance_of_class.binding_one, instance_of_class.binding_two ]
+      instance_of_class.«binding_order».should == [ instance_of_class.a, instance_of_class.binding_one, instance_of_class.binding_two ]
     end
   end
 
@@ -297,8 +297,8 @@ describe ::Perspective::View do
   ###################
 
   context '#binding_order' do
-    it 'is an alias for ::«binding_order' do
-      ::Perspective::View::ObjectInstance.instance_method( :binding_order ).should == ::Perspective::View::ObjectInstance.instance_method( :«binding_order )
+    it 'is an alias for ::«binding_order»' do
+      ::Perspective::View::ObjectInstance.instance_method( :binding_order ).should == ::Perspective::View::ObjectInstance.instance_method( :«binding_order» )
     end
   end
 
@@ -337,10 +337,10 @@ describe ::Perspective::View do
   end
 
   #######################################
-  #  «binding_order_declared_empty=  #
+  #  «binding_order_declared_empty»=  #
   #######################################
 
-  context '#«binding_order_declared_empty=' do
+  context '#«binding_order_declared_empty»=' do
     it 'set whether required bindings should be validated (if declared empty, they will not be required)' do
       instance_of_class.rendering_empty!
       instance_of_class.binding_order_declared_empty?.should be true
@@ -369,17 +369,17 @@ describe ::Perspective::View do
   end
 
 	##############################
-  #  «render_binding_order  #
+  #  «render_binding_order»  #
   ##############################
 
-  context '#«render_binding_order' do
+  context '#«render_binding_order»' do
     it 'compiles a list of render values corresponding to each binding; intended for more advanced rendering implemented by later binding/container types' do
       class_instance.attr_order :binding_one, :binding_two, :content
       instance_of_class.binding_one.value = :binding_one_value
       instance_of_class.binding_two.value = :binding_two_value
       instance_of_class.content.value = :content_value
       instance_of_class.a.b.c.content.value = :c_content_value
-      instance_of_class.«render_binding_order.should == [:binding_one_value, :binding_two_value, :content_value]
+      instance_of_class.«render_binding_order».should == [:binding_one_value, :binding_two_value, :content_value]
     end
   end
 
