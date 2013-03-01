@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 
 module ::Perspective::View::ObjectInstance
 
@@ -65,9 +66,9 @@ module ::Perspective::View::ObjectInstance
   
   self.«binding_order_declared_empty = false
   
-  #######################################
+  ####################################
   #  «binding_order_declared_empty=  #
-  #######################################
+  ####################################
 
   ###
   #
@@ -85,9 +86,9 @@ module ::Perspective::View::ObjectInstance
     
   end
   
-  ##########################
+  ######################
   #  rendering_empty?  #
-  ##########################
+  ######################
   
   def rendering_empty?
     
@@ -95,23 +96,19 @@ module ::Perspective::View::ObjectInstance
     
   end
   
-	##############################
+	###########################
   #  «render_binding_order  #
-  ##############################
+  ###########################
   
 	def «render_binding_order
 		
-		ensure_required_bindings_present!
+    ensure_required_bindings_present! unless view_rendering_empty
 
 		child_nodes = [ ]
 		
 		«binding_order.each do |this_binding|
-		  if result_node = this_binding.«render_value
-		    child_nodes.push( result_node )
-	    end
+	    child_nodes.push( result_node ) if result_node = this_binding.«render_value
 		end
-		
-    self.«binding_order_declared_empty = false
 		    
     return child_nodes
     
@@ -125,9 +122,8 @@ module ::Perspective::View::ObjectInstance
     
     render_value_valid = true
     
-    «bindings.each do |this_binding_name, this_binding|
-      render_value_valid = this_binding.required_bindings_present?
-      break unless render_value_valid
+    «bindings.each do |this_name, this_binding|
+      break unless render_value_valid = this_binding.required_bindings_present?
     end
     
     return render_value_valid
@@ -140,9 +136,7 @@ module ::Perspective::View::ObjectInstance
   
   def ensure_required_bindings_present!
     
-    «bindings.each do |this_binding_name, this_binding|
-      this_binding.ensure_required_bindings_present!
-    end
+    «bindings.each { |this_name, this_binding| this_binding.ensure_required_bindings_present! }
     
     return self
     
