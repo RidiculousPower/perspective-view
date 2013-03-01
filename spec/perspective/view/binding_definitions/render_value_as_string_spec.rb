@@ -18,17 +18,17 @@ describe ::Perspective::View::BindingDefinitions::RenderValueAsString do
   let( :binding_instance ) do
     binding_instance = string_binding_container.new.object_binding
     binding_instance.extend( ::Perspective::View::BindingDefinitions::RenderValueAsString )
-    binding_instance.__value__ = object_instance
+    binding_instance.«value = object_instance
     binding_instance
   end
   
   ######################
-	#  __render_value__  #
+	#  «render_value  #
 	######################
 	
-	context '#__render_value__' do
-	  it 'will return __value__ as a string' do
-	    binding_instance.__render_value__.should == binding_instance.__value__.to_s
+	context '#«render_value' do
+	  it 'will return «value as a string' do
+	    binding_instance.«render_value.should == binding_instance.«value.to_s
     end
   end
   

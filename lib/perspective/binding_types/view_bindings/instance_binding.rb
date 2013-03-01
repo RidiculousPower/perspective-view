@@ -2,34 +2,34 @@
 module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
     
   ##############
-  #  __view__  #
+  #  «view  #
   ##############
 
-  alias_method :__view__, :__container__
+  alias_method :«view, :«container
 
   ###############
-  #  __view__=  #
+  #  «view=  #
   ###############
 
-  alias_method :__view__=, :__container__=
+  alias_method :«view=, :«container=
 
   ###########
   #  view   #
   ###########
 
-  alias_method :view, :__view__
+  alias_method :view, :«view
 
   ###########
   #  view=  #
   ###########
 
-  alias_method :view=, :__view__=
+  alias_method :view=, :«view=
 
   ######################
-	#  __render_value__  #
+	#  «render_value  #
 	######################
   
-  alias_method  :__render_value__, :__value__
+  alias_method  :«render_value, :«value
 
   ################################
   #  required_bindings_present?  #
@@ -39,9 +39,9 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
     
     render_value_valid = true
 
-    if required? and __value__.nil?
+    if required? and «value.nil?
       render_value_valid = false
-    elsif view = __view__
+    elsif view = «view
       render_value_valid = view.required_bindings_present?
     end
 
@@ -64,10 +64,10 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
   end
   
   ####################
-  #  __view_count__  #
+  #  «view_count  #
   ####################
   
-  alias_method :__view_count__, :__container_count__
+  alias_method :«view_count, :«container_count
 
   ######################
   #  rendering_empty!  #
@@ -75,7 +75,7 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
   
   def rendering_empty!
     
-    @__view_rendering_empty__ = true
+    @«view_rendering_empty = true
     
   end
   
@@ -85,7 +85,7 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
   
   def rendering_empty?
     
-    return @__view_rendering_empty__ ||= false
+    return @«view_rendering_empty ||= false
     
   end
 	

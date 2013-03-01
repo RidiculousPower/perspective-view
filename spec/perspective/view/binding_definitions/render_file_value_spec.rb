@@ -13,31 +13,31 @@ describe ::Perspective::View::BindingDefinitions::RenderFileValue do
     file_binding_container_class
   end
   
-  let( :file_instance ) { ::File.new( __FILE__ ) }
+  let( :file_instance ) { ::File.new( «FILE ) }
   
   let( :file_binding ) do
     file_binding = file_binding_container.new.file_binding
     file_binding.extend( ::Perspective::View::BindingDefinitions::RenderFileValue )
-    file_binding.__value__ = file_instance
+    file_binding.«value = file_instance
     file_binding
   end
   
 	######################
-	#  __render_value__  #
+	#  «render_value  #
 	######################
 
-	context '#__render_value__' do
+	context '#«render_value' do
 	  context 'files by path' do
 	    before( :each ) { ::Perspective::Configuration.files.by_path! }
-      it 'will return the path of the File instance in __value__' do
-        file_binding.__render_value__.should == file_binding.__value__.to_path
+      it 'will return the path of the File instance in «value' do
+        file_binding.«render_value.should == file_binding.«value.to_path
       end
     end
     context 'files by content' do
 	    before( :each ) { ::Perspective::Configuration.files.by_content! }
-      it 'will return the contents of the File instance in __value__' do
-        render_value = file_binding.__render_value__
-        file = file_binding.__value__
+      it 'will return the contents of the File instance in «value' do
+        render_value = file_binding.«render_value
+        file = file_binding.«value
         file.pos = 0
         render_value.should == file.readlines.join
       end

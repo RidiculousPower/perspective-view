@@ -2,10 +2,10 @@
 module ::Perspective::View::BindingDefinitions::RenderValueAsString
 
 	######################
-	#  __render_value__  #
+	#  «render_value  #
 	######################
 	
-	def __render_value__( current_value = __value__ )
+	def «render_value( current_value = «value )
 	  
     return current_value.to_s
     

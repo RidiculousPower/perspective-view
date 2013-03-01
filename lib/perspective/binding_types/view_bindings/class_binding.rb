@@ -2,61 +2,61 @@
 module ::Perspective::BindingTypes::ViewBindings::ClassBinding
   
   ####################
-  #  __view_class__  #
+  #  «view_class  #
   ####################
 
-  alias_method :__view_class__, :__container_class__
+  alias_method :«view_class, :«container_class
 
   #####################
-  #  __view_class__=  #
+  #  «view_class=  #
   #####################
   
-  alias_method :__view_class__=, :__container_class__=
+  alias_method :«view_class=, :«container_class=
 
   ################
   #  view_class  #
   ################
 
-  alias_method :view_class, :__view_class__
+  alias_method :view_class, :«view_class
 
   #################
   #  view_class=  #
   #################
 
-  alias_method :view_class=, :__view_class__=
+  alias_method :view_class=, :«view_class=
   
   ##################################
-  #  __validate_container_class__  #
+  #  «validate_container_class  #
   ##################################
 
-  def __validate_container_class__( container_class )
+  def «validate_container_class( container_class )
   
     super
   
-    __validate_view_class__( container_class )
+    «validate_view_class( container_class )
     
   end
 
   #############################
-  #  __validate_view_class__  #
+  #  «validate_view_class  #
   #############################
 
-  def __validate_view_class__( view_class )
+  def «validate_view_class( view_class )
     
     # implementation provided by including class/subclass or later included modules
     
   end
 
   ################
-  #  __render__  #
+  #  «render  #
   ################
 
-  alias_method :__render__, :__configure__
+  alias_method :«render, :«configure
 
   ############
   #  render  #
   ############
 
-  alias_method :render, :__render__
+  alias_method :render, :«render
 
 end

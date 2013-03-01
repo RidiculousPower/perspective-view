@@ -17,20 +17,20 @@ module ::Perspective::View::SingletonInstance
 		     binding_order_array[ 0 ].is_a?( ::Array ) and
 		     binding_order_array[ 0 ].empty? )
 		
-      self.__binding_order_declared_empty__ = true
-		  __binding_order__.clear
+      self.«binding_order_declared_empty = true
+		  «binding_order.clear
 		  
 		else
 
-      self.__binding_order_declared_empty__ = false
+      self.«binding_order_declared_empty = false
 
 	  	binding_order_array.each do |this_binding_name|
 	  	  
-	  	  __validate_binding_name_for_order__( this_binding_name )
+	  	  «validate_binding_name_for_order( this_binding_name )
 	  	  
 			end
 
-			__binding_order__.replace( binding_order_array )
+			«binding_order.replace( binding_order_array )
 			
 		end
 		
@@ -44,7 +44,7 @@ module ::Perspective::View::SingletonInstance
   
   def ensure_binding_order_declared!
 
-    if ! binding_order_declared_empty? and __binding_order__.empty?
+    if ! binding_order_declared_empty? and «binding_order.empty?
       raise ::Perspective::Bindings::Exception::BindingOrderEmpty,
               'Binding order was empty. Declare binding order using :attr_order.'
     end
@@ -52,10 +52,10 @@ module ::Perspective::View::SingletonInstance
   end
 
 	#########################################
-  #  __validate_binding_name_for_order__  #
+  #  «validate_binding_name_for_order  #
 	#########################################
 	
-	def __validate_binding_name_for_order__( binding_name )
+	def «validate_binding_name_for_order( binding_name )
 	  
 	  unless has_binding?( binding_name )
   		raise ::Perspective::Bindings::Exception::NoBindingError.new( self, binding_name )
@@ -64,15 +64,15 @@ module ::Perspective::View::SingletonInstance
   end
 
   ################
-  #  __render__  #
+  #  «render  #
   ################
 
-  alias_method :__render__, :__configure__
+  alias_method :«render, :«configure
 
   ############
   #  render  #
   ############
 
-  alias_method :render, :__render__
+  alias_method :render, :«render
 
 end
