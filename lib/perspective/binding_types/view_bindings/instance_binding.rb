@@ -32,7 +32,11 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
 	#  «render_value»  #
 	####################
   
-  alias_method  :«render_value», :«value»
+	def «render_value»( current_value = «value» )
+	  
+	  return current_value.to_s
+	  
+  end
 
   ################################
   #  required_bindings_present?  #

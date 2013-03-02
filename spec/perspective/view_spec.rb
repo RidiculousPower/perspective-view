@@ -152,8 +152,9 @@ describe ::Perspective::View do
   	####################
 
     context '#«render_value»' do
-      it 'is an alias for #«value»' do
-        ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«render_value» ).should == ::Perspective::BindingTypes::ViewBindings::InstanceBinding.instance_method( :«value» )
+      it 'returns #«value».to_s' do
+        instance_of_class.content = :content_value
+        instance_of_class.•content.«render_value».should == instance_of_class.content.to_s
       end
     end
 
@@ -162,22 +163,24 @@ describe ::Perspective::View do
     ################################
 
     context '#«required_bindings_present»' do
-      context 'when ensure_present is false' do
-        it 'will return whether all required bindings have values' do
-          instance_of_class.a.required_bindings_present?.should be true
-          instance_of_class.a.b.required = true
-          instance_of_class.a.required_bindings_present?.should be false
-        end
-      end
-      context 'when ensure_present is true' do
-        it 'will raise an exception if all required bindings do not have values' do
-          instance_of_class.a.required_bindings_present?( true ).should be true
-          instance_of_class.a.b.required = true
-          ::Proc.new { instance_of_class.a.required_bindings_present?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
-        end
+      it 'will return whether all required bindings have values' do
+        instance_of_class.a.required_bindings_present?.should be true
+        instance_of_class.a.b.required = true
+        instance_of_class.a.required_bindings_present?.should be false
       end
     end
 
+    #######################################
+    #  ensure_required_bindings_present!  #
+    #######################################
+    
+    context '#ensure_required_bindings_present!' do
+      it 'will raise an exception if all required bindings do not have values' do
+        instance_of_class.a.b.required = true
+        ::Proc.new { instance_of_class.a.ensure_required_bindings_present! }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
+      end
+    end
+    
     ##################
     #  «view_count»  #
     ##################
@@ -288,7 +291,7 @@ describe ::Perspective::View do
   context '#«binding_order»' do
     it 'returns the binding order with instances corresponding to ::«binding_order»; permits modification' do
       class_instance.attr_order :a, :binding_one, :binding_two
-      instance_of_class.«binding_order».should == [ instance_of_class.a, instance_of_class.binding_one, instance_of_class.binding_two ]
+      instance_of_class.«binding_order».should == [ instance_of_class.•a, instance_of_class.•binding_one, instance_of_class.•binding_two ]
     end
   end
 
@@ -352,19 +355,21 @@ describe ::Perspective::View do
   ################################
 
   context '#required_bindings_present?' do
-    context 'when ensure_present is false' do
-      it 'will return whether all required bindings have values' do
-        instance_of_class.required_bindings_present?.should be true
-        instance_of_class.a.required = true
-        instance_of_class.required_bindings_present?.should be false
-      end
+    it 'will return whether all required bindings have values' do
+      instance_of_class.required_bindings_present?.should be true
+      instance_of_class.a.required = true
+      instance_of_class.required_bindings_present?.should be false
     end
-    context 'when ensure_present is true' do
-      it 'will raise an exception if all required bindings do not have values' do
-        instance_of_class.required_bindings_present?( true ).should be true
-        instance_of_class.a.required = true
-        ::Proc.new { instance_of_class.required_bindings_present?( true ) }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
-      end
+  end
+
+  #######################################
+  #  ensure_required_bindings_present!  #
+  #######################################
+
+  context 'ensure_required_bindings_present!' do
+    it 'will raise an exception if all required bindings do not have values' do
+      instance_of_class.a.required = true
+      ::Proc.new { instance_of_class.ensure_required_bindings_present! }.should raise_error( ::Perspective::Bindings::Exception::BindingRequired )
     end
   end
 
@@ -375,11 +380,11 @@ describe ::Perspective::View do
   context '#«render_binding_order»' do
     it 'compiles a list of render values corresponding to each binding; intended for more advanced rendering implemented by later binding/container types' do
       class_instance.attr_order :binding_one, :binding_two, :content
-      instance_of_class.binding_one.value = :binding_one_value
-      instance_of_class.binding_two.value = :binding_two_value
-      instance_of_class.content.value = :content_value
-      instance_of_class.a.b.c.content.value = :c_content_value
-      instance_of_class.«render_binding_order».should == [:binding_one_value, :binding_two_value, :content_value]
+      instance_of_class.binding_one = :binding_one_value
+      instance_of_class.binding_two = :binding_two_value
+      instance_of_class.content = :content_value
+      instance_of_class.a.b.c.content = :c_content_value
+      instance_of_class.«render_binding_order».should == [ 'binding_one_value', 'binding_two_value', 'content_value' ]
     end
   end
 

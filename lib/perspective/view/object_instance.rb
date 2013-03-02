@@ -14,12 +14,14 @@ module ::Perspective::View::ObjectInstance
   
 	def «render_binding_order»
 		
-    ensure_required_bindings_present! unless view_rendering_empty
+    ensure_required_bindings_present! unless binding_order_declared_empty?
 
 		child_nodes = [ ]
 		
 		«binding_order».each do |this_binding|
-	    child_nodes.push( result_node ) if result_node = this_binding.«render_value»
+		  if result_node = this_binding.«render_value»
+	      child_nodes.push( result_node )
+      end
 		end
 		    
     return child_nodes
