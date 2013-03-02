@@ -3,99 +3,11 @@
 module ::Perspective::View::ObjectInstance
 
   include ::Perspective::Bindings::Container::ObjectInstance
-
+  include ::Perspective::View::ObjectInstanceAndBindingInstance
+  
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array
 
-  #####################
-  #  «binding_order»  #
-  #####################
-
-  attr_array  :«binding_order» do
-
-    #======================#
-	  #  child_pre_set_hook  #
-	  #======================#
-
-	  def child_pre_set_hook( index, binding_name_or_instance, is_insert, parent_hash )
-      
-      child_instance = nil
-
-      case binding_name_or_instance
-        
-        when ::Symbol, ::String
-          
-          case instance = configuration_instance
-            when ::Perspective::View::ObjectInstance
-              child_instance = instance.«binding»( binding_name_or_instance )
-            else
-              child_instance = binding_name_or_instance
-          end
-
-        when ::Perspective::Bindings::BindingBase::ClassBinding,
-             ::Perspective::Bindings::BindingBase::InstanceBinding
-
-          child_instance = configuration_instance.«binding»( binding_name_or_instance.«name» )
-          
-      end
-      
-      return child_instance
-      
-	  end
-	  
-  end
-  
-  ###################
-  #  binding_order  #
-  ###################
-
-  Controller.alias_module_and_instance_methods :binding_order, :«binding_order»
-  
-  ###################################
-  #  binding_order_declared_empty?  #
-  ###################################
-  
-  ###
-  #
-  #
-  attr_configuration  :binding_order_declared_empty? => :«binding_order_declared_empty»=
-  
-  ####################################################
-  #  binding_order_declared_empty?  Default Setting  #
-  ####################################################
-  
-  self.«binding_order_declared_empty» = false
-  
-  #####################################
-  #  «binding_order_declared_empty»=  #
-  #####################################
-
-  ###
-  #
-  #
-  
-  ######################
-  #  rendering_empty!  #
-  ######################
-  
-  def rendering_empty!
-    
-    self.«binding_order_declared_empty» = true
-    
-    return self
-    
-  end
-  
-  ######################
-  #  rendering_empty?  #
-  ######################
-  
-  def rendering_empty?
-    
-    return binding_order_declared_empty?
-    
-  end
-  
 	############################
   #  «render_binding_order»  #
   ############################

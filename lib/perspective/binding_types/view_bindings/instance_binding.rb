@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 
 module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
+
+  include ::Perspective::View::ObjectInstanceAndBindingInstance
     
   ############
   #  «view»  #

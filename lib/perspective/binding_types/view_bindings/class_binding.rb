@@ -2,6 +2,8 @@
 
 module ::Perspective::BindingTypes::ViewBindings::ClassBinding
   
+  include ::Perspective::View::ObjectInstanceAndBindingInstance
+  
   ##################
   #  «view_class»  #
   ##################

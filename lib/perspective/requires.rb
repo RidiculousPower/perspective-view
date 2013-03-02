@@ -9,6 +9,9 @@ files = [
   'binding_types/view',
 
   'binding_types/view_bindings',
+
+  'view/configuration',
+  'view/object_instance_and_binding_instance',
   
   'binding_types/view_bindings/class_binding',
   'binding_types/view_bindings/instance_binding',  
