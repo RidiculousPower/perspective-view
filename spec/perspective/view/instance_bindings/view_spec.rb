@@ -22,9 +22,9 @@ describe ::Perspective::View::InstanceBindings::View do
   
   let( :view_instance ) { view_instance_class.new }
 
-  ##############################
+  ##########################
   #  binding_value_valid?  #
-  ##############################
+  ##########################
   
   context '#binding_value_valid?' do
     context 'when value is a Perspective::View' do

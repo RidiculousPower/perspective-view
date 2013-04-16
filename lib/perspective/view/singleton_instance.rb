@@ -6,6 +6,7 @@ module ::Perspective::View::SingletonInstance
   include ::Perspective::BindingTypes::ViewBindings
 
   include ::Perspective::View::Configuration
+  include ::Perspective::View::SingletonAndClassBindingInstance
   
   ##############
   #  «render»  #

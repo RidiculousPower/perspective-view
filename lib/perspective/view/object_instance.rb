@@ -4,6 +4,7 @@ module ::Perspective::View::ObjectInstance
 
   include ::Perspective::Bindings::Container::ObjectInstance
   include ::Perspective::View::ObjectAndBindingInstance
+  include ::Perspective::View::ObjectAndInstanceBindingInstance
   
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array

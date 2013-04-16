@@ -12,6 +12,8 @@ files = [
 
   'view/configuration',
   'view/object_and_binding_instance',
+  'view/object_and_instance_binding_instance',
+  'view/singleton_and_class_binding_instance',
   
   'binding_types/view_bindings/class_binding',
   'binding_types/view_bindings/instance_binding',  

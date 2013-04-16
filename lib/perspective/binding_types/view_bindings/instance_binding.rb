@@ -3,6 +3,7 @@
 module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
 
   include ::Perspective::View::ObjectAndBindingInstance
+  include ::Perspective::View::ObjectAndInstanceBindingInstance
     
   ############
   #  «view»  #

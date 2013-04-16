@@ -296,9 +296,74 @@ describe ::Perspective::View do
   #####################
 
   context '#«binding_order»' do
-    it 'returns the binding order with instances corresponding to ::«binding_order»; permits modification' do
-      class_instance.attr_order :a, :binding_one, :binding_two
-      instance_of_class.«binding_order».should == [ instance_of_class.•a, instance_of_class.•binding_one, instance_of_class.•binding_two ]
+    context 'class instance' do
+      it 'will store class binding name' do
+        nested_class_A.«binding_order».clear
+        nested_class_A.«binding_order».push( :b )
+        nested_class_A.«binding_order».should == [ :b ]
+      end
+      it 'will translate class binding instance to name' do
+        nested_class_A.«binding_order».clear
+        nested_class_A.«binding_order».push( nested_class_A.•b )
+        nested_class_A.«binding_order».should == [ :b ]
+      end
+      it 'object instance will translate class binding name to instance binding instance' do
+        instance_of_class.•a.«view».«binding_order».should == [ instance_of_class.•a.•b ]
+      end
+      it 'class binding will keep class binding name' do
+        class_instance.•a.«binding_order».should == [ :b ]
+      end
+      it 'instance binding will translate class binding name to instance binding instance' do
+        instance_of_class.•a.«binding_order».should == [ instance_of_class.•a.•b ]
+      end
+    end
+    context 'class binding' do
+      it 'will store class binding name' do
+        class_instance.•a.«binding_order».clear
+        class_instance.•a.«binding_order».push( :b )
+        class_instance.•a.«binding_order».should == [ :b ]
+      end
+      it 'will translate class binding instance to name' do
+        class_instance.•a.«binding_order».clear
+        class_instance.•a.«binding_order».push( class_instance.•a.•b )
+        class_instance.•a.«binding_order».should == [ :b ]
+      end
+      it 'class binding will keep class binding name' do
+        subclass.•a.«binding_order».should == [ :b ]
+      end
+      it 'instance binding will translate class binding name to instance binding instance' do
+        instance_of_class.•a.«binding_order».should == [ instance_of_class.•a.•b ]
+      end
+      it 'object instance will translate class binding name to instance binding instance' do
+        instance_of_class.•a.«view».«binding_order».should == [ instance_of_class.•a.•b ]
+      end
+    end
+    context 'instance binding' do
+      it 'will store instance binding instance' do
+        instance_of_class.•a.«binding_order».clear
+        instance_of_class.•a.«binding_order».push( instance_of_class.•a.•b )
+        instance_of_class.•a.«binding_order».should == [ instance_of_class.•a.•b ]
+      end
+      it 'will translate instance binding name to instance' do
+        instance_of_class.•a.«binding_order».clear
+        instance_of_class.•a.«binding_order».push( :b )
+        instance_of_class.•a.«binding_order».should == [ instance_of_class.•a.•b ]
+      end
+      it 'object instance will translate class binding name to instance binding instance' do
+        instance_of_class.•a.«view».«binding_order».should == [ instance_of_class.•a.•b ]
+      end
+    end
+    context 'object instance' do
+      it 'will store instance binding instance' do
+        instance_of_class.•a.«view».«binding_order».clear
+        instance_of_class.•a.«view».«binding_order».push( instance_of_class.•a.«view».•b )
+        instance_of_class.•a.«view».«binding_order».should == [ instance_of_class.•a.•b ]
+      end
+      it 'will translate instance binding name to instance' do
+        instance_of_class.•a.«view».«binding_order».clear
+        instance_of_class.•a.«view».«binding_order».push( :b )
+        instance_of_class.•a.«view».«binding_order».should == [ instance_of_class.•a.•b ]
+      end
     end
   end
 
