@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-module ::Perspective::View::BindingDefinitions::RenderFileValue
+module ::Perspective::View::InstanceBindings::RenderFileValue
 
 	####################
 	#  «render_value»  #

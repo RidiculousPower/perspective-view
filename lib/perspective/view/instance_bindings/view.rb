@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 
-module ::Perspective::View::BindingDefinitions::View
+module ::Perspective::View::InstanceBindings::View
 
-  include ::Perspective::Bindings::BindingDefinitions::Text
-  include ::Perspective::Bindings::BindingDefinitions::Number
+  include ::Perspective::Bindings::InstanceBindings::Text
+  include ::Perspective::Bindings::InstanceBindings::Number
 
   ##############################
   #  binding_value_valid?  #

@@ -3,7 +3,7 @@
 module ::Perspective::View::ObjectInstance
 
   include ::Perspective::Bindings::Container::ObjectInstance
-  include ::Perspective::View::ObjectInstanceAndBindingInstance
+  include ::Perspective::View::ObjectAndBindingInstance
   
   include ::CascadingConfiguration::Setting
   include ::CascadingConfiguration::Array
@@ -37,7 +37,9 @@ module ::Perspective::View::ObjectInstance
     render_value_valid = true
     
     «bindings».each do |this_name, this_binding|
-      break unless render_value_valid = this_binding.required_bindings_present?
+      if this_binding.respond_to?( :required_bindings_present? )
+        break unless render_value_valid = this_binding.required_bindings_present?
+      end
     end
     
     return render_value_valid
@@ -50,7 +52,11 @@ module ::Perspective::View::ObjectInstance
   
   def ensure_required_bindings_present!
     
-    «bindings».each { |this_name, this_binding| this_binding.ensure_required_bindings_present! }
+    «bindings».each do |this_name, this_binding| 
+      if this_binding.respond_to?( :ensure_required_bindings_present! )
+        this_binding.ensure_required_bindings_present!
+      end
+    end
     
     return self
     

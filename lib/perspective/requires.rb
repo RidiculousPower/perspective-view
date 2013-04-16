@@ -2,16 +2,16 @@
 
 files = [
     
-  'view/binding_definitions/render_file_value',
-  'view/binding_definitions/render_value_as_string',
-  'view/binding_definitions/view',
+  'view/instance_bindings/render_file_value',
+  'view/instance_bindings/render_value_as_string',
+  'view/instance_bindings/view',
   
   'binding_types/view',
 
   'binding_types/view_bindings',
 
   'view/configuration',
-  'view/object_instance_and_binding_instance',
+  'view/object_and_binding_instance',
   
   'binding_types/view_bindings/class_binding',
   'binding_types/view_bindings/instance_binding',  

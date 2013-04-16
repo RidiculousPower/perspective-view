@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
 module ::Perspective::View
-  module BindingDefinitions
+  module InstanceBindings
   end
 end

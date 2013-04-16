@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-module ::Perspective::View::ObjectInstanceAndBindingInstance
+module ::Perspective::View::ObjectAndBindingInstance
   
   include ::Perspective::View::Configuration
   
@@ -19,59 +19,41 @@ module ::Perspective::View::ObjectInstanceAndBindingInstance
 
 	  def pre_set_hook( index, binding_name_or_instance, is_insert, length )
       
-      set_value = nil
-      
-      case instance = configuration_instance
-        
-        when ::Perspective::View::ObjectInstance,
-             ::Perspective::Bindings::InstanceBinding
-        
-          case binding_name_or_instance
+      return case instance = configuration_instance
+       when ::Perspective::View::ObjectInstance, ::Perspective::Bindings::InstanceBinding
+          case binding_name_or_instance
             when ::Symbol, ::String
-              set_value = instance.«binding»( binding_name_or_instance )
+              instance.«binding»( binding_name_or_instance )
             when ::Perspective::Bindings::ClassBinding
-              set_value = instance.«binding»( binding_name_or_instance.«name» )
+              instance.«binding»( binding_name_or_instance.«name» )
             when ::Perspective::Bindings::InstanceBinding
-              set_value = binding_name_or_instance
+              binding_name_or_instance
           end
-        
         else
-          
-          set_value = binding_name_or_instance
-          
+          binding_name_or_instance
       end
 
-      return set_value
-      
     end
     
     #======================#
 	  #  child_pre_set_hook  #
 	  #======================#
 
-	  def child_pre_set_hook( index, binding_name_or_instance, is_insert, length )
+	  def child_pre_set_hook( index, binding_name_or_instance, is_insert, parent_array )
       
-      child_instance = nil
-
-      case binding_name_or_instance
-        
+      instance = configuration_instance
+      
+      return case binding_name_or_instance
         when ::Symbol, ::String
-          
-          case instance = configuration_instance
+         case instance
             when ::Perspective::View::ObjectInstance
-              child_instance = instance.«binding»( binding_name_or_instance )
+              instance.«binding»( binding_name_or_instance )
             else
-              child_instance = binding_name_or_instance
+              binding_name_or_instance
           end
-
-        when ::Perspective::Bindings::ClassBinding,
-             ::Perspective::Bindings::InstanceBinding
-
-          child_instance = configuration_instance.«binding»( binding_name_or_instance.«name» )
-          
+        when ::Perspective::Bindings::Binding
+          instance.«binding»( binding_name_or_instance.«name» )
       end
-      
-      return child_instance
       
 	  end
 	  
@@ -92,9 +74,9 @@ module ::Perspective::View::ObjectInstanceAndBindingInstance
   #
   attr_configuration  :binding_order_declared_empty? => :«binding_order_declared_empty»=
   
-  ####################################################
-  #  binding_order_declared_empty?  Default Setting  #
-  ####################################################
+  ###########################################
+  #  binding_order_declared_empty? Default  #
+  ###########################################
   
   self.«binding_order_declared_empty» = false
   

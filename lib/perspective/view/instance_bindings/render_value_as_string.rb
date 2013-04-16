@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-module ::Perspective::View::BindingDefinitions::RenderValueAsString
+module ::Perspective::View::InstanceBindings::RenderValueAsString
 
 	####################
 	#  «render_value»  #

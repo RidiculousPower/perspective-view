@@ -2,6 +2,6 @@
 
 class ::Perspective::BindingTypes::ViewBindings::Float::InstanceBinding
 
-  include ::Perspective::View::BindingDefinitions::RenderFileValue
+  include ::Perspective::View::InstanceBindings::RenderFileValue
 
 end

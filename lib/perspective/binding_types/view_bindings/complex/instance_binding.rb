@@ -2,6 +2,6 @@
 
 class ::Perspective::BindingTypes::ViewBindings::Complex::InstanceBinding
 
-  include ::Perspective::View::BindingDefinitions::RenderValueAsString
+  include ::Perspective::View::InstanceBindings::RenderValueAsString
 
 end

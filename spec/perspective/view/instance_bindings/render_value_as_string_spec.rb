@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 
 require_relative '../../../../lib/perspective/view.rb'
-require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/binding_definitions/binding_definition_test_setup.rb'
+require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/instance_bindings/binding_definition_test_setup.rb'
 
-describe ::Perspective::View::BindingDefinitions::RenderValueAsString do
+describe ::Perspective::View::InstanceBindings::RenderValueAsString do
 
   let( :string_binding_container ) do
     string_binding_container_class = ::Class.new do
@@ -18,7 +18,7 @@ describe ::Perspective::View::BindingDefinitions::RenderValueAsString do
   
   let( :binding_instance ) do
     binding_instance = string_binding_container.new.object_binding
-    binding_instance.extend( ::Perspective::View::BindingDefinitions::RenderValueAsString )
+    binding_instance.extend( ::Perspective::View::InstanceBindings::RenderValueAsString )
     binding_instance.«value» = object_instance
     binding_instance
   end

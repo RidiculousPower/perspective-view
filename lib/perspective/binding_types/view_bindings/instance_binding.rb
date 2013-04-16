@@ -2,7 +2,7 @@
 
 module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
 
-  include ::Perspective::View::ObjectInstanceAndBindingInstance
+  include ::Perspective::View::ObjectAndBindingInstance
     
   ############
   #  «view»  #
@@ -45,7 +45,7 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
   def required_bindings_present?
     
     render_value_valid = true
-
+    
     if required? and «value».nil?
       render_value_valid = false
     elsif view = «view»
@@ -62,7 +62,13 @@ module ::Perspective::BindingTypes::ViewBindings::InstanceBinding
   
   def ensure_required_bindings_present!
     
-    unless rendering_empty? or required_bindings_present?
+    bindings_present = false
+
+    if view = «view»
+      view.ensure_required_bindings_present!
+    end
+    
+    if required? and «value».nil?
       raise ::Perspective::Bindings::Exception::BindingRequired.new( self )
     end
     

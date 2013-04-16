@@ -8,7 +8,7 @@ require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective
 describe ::Perspective::View do
 
   let( :bindings_module ) { ::Perspective::View }
-  setup_container_and_bindings_tests  
+  setup_container_and_bindings_tests( ::Perspective::View )
   
   it_behaves_like :container_and_bindings
 
@@ -60,7 +60,7 @@ describe ::Perspective::View do
 
     context '#«validate_view_class»' do
       it 'does nothing, defined by implementing classes' do
-        class_instance.a.«validate_view_class»( ::Object )
+        class_instance.•a.«validate_view_class»( ::Object )
       end
     end
 
@@ -78,7 +78,7 @@ describe ::Perspective::View do
         instance
       end
       it 'adds a call to #«validate_view_class»' do
-        instance.a.«validate_container_class»( instance.a.«container_class» )
+        instance.•a.«validate_container_class»( instance.•a.«container_class» )
         block_state.block_ran?.should be true
       end
     end
@@ -251,6 +251,13 @@ describe ::Perspective::View do
       class_instance.«validate_binding_name_for_order»( :a )
       ::Proc.new { class_instance.«validate_binding_name_for_order»( :b ) }.should raise_error( ::Perspective::Bindings::Exception::NoBindingError )
     end
+    it 'ensures that binding belongs to container for binding' do
+      class_instance.«validate_binding_name_for_order»( class_instance.a )
+      ::Proc.new { class_instance.«validate_binding_name_for_order»( class_instance.a.b ) }.should raise_error( ::ArgumentError )
+    end
+    it 'ensures that other objects are not inserted' do
+      ::Proc.new { class_instance.«validate_binding_name_for_order»( ::Object.new ) }.should raise_error( ::ArgumentError )
+    end
   end
 
   ################
@@ -373,6 +380,24 @@ describe ::Perspective::View do
     end
   end
 
+	#######################################
+  #  «validate_binding_name_for_order»  #
+	#######################################
+
+  context '::«validate_binding_name_for_order»' do
+    it 'ensures that binding exists for name' do
+      instance_of_class.«validate_binding_name_for_order»( :a )
+      ::Proc.new { instance_of_class.«validate_binding_name_for_order»( :b ) }.should raise_error( ::Perspective::Bindings::Exception::NoBindingError )
+    end
+    it 'ensures that binding belongs to container for binding' do
+      instance_of_class.«validate_binding_name_for_order»( instance_of_class.a )
+      ::Proc.new { instance_of_class.«validate_binding_name_for_order»( instance_of_class.a.b ) }.should raise_error( ::ArgumentError )
+    end
+    it 'ensures that other objects are not inserted' do
+      ::Proc.new { instance_of_class.«validate_binding_name_for_order»( ::Object.new ) }.should raise_error( ::ArgumentError )
+    end
+  end
+
 	############################
   #  «render_binding_order»  #
   ############################
@@ -383,7 +408,7 @@ describe ::Perspective::View do
       instance_of_class.binding_one = :binding_one_value
       instance_of_class.binding_two = :binding_two_value
       instance_of_class.content = :content_value
-      instance_of_class.a.b.c.content = :c_content_value
+      instance_of_class.a.b.c = :c_content_value
       instance_of_class.«render_binding_order».should == [ 'binding_one_value', 'binding_two_value', 'content_value' ]
     end
   end

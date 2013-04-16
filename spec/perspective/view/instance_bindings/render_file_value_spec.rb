@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 
 require_relative '../../../../lib/perspective/view.rb'
-require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/binding_definitions/binding_definition_test_setup.rb'
+require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/instance_bindings/binding_definition_test_setup.rb'
 
-describe ::Perspective::View::BindingDefinitions::RenderFileValue do
+describe ::Perspective::View::InstanceBindings::RenderFileValue do
   
-  let( :file_binding_container ) do
+  let( :file_binding_container_class ) do
     file_binding_container_class = ::Class.new do
       include ::Perspective::Bindings
       attr_file :file_binding
@@ -14,11 +14,13 @@ describe ::Perspective::View::BindingDefinitions::RenderFileValue do
     file_binding_container_class
   end
   
-  let( :file_instance ) { ::File.new( «FILE ) }
+  let( :file_binding_container ) { file_binding_container_class.new }
+  
+  let( :file_instance ) { ::File.new( __FILE__ ) }
   
   let( :file_binding ) do
-    file_binding = file_binding_container.new.file_binding
-    file_binding.extend( ::Perspective::View::BindingDefinitions::RenderFileValue )
+    file_binding = file_binding_container.•file_binding
+    file_binding.extend( ::Perspective::View::InstanceBindings::RenderFileValue )
     file_binding.«value» = file_instance
     file_binding
   end

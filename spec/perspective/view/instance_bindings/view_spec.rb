@@ -2,14 +2,14 @@
 
 require_relative '../../../../lib/perspective/view.rb'
 
-require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/binding_definitions/binding_definition_test_setup.rb'
-require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/binding_definitions/text.rb'
-require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/binding_definitions/number.rb'
+require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/instance_bindings/binding_definition_test_setup.rb'
+require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/instance_bindings/text.rb'
+require_relative ::File.join ::Perspective::Bindings.spec_location, 'perspective/bindings/instance_bindings/number.rb'
 
-describe ::Perspective::View::BindingDefinitions::View do
+describe ::Perspective::View::InstanceBindings::View do
 
   setup_binding_definition_tests
-  let( :binding_definition_module ) { ::Perspective::View::BindingDefinitions::View }
+  let( :binding_definition_module ) { ::Perspective::View::InstanceBindings::View }
   
   it_behaves_like :text_container_binding
   it_behaves_like :number_container_binding  
