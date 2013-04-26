@@ -14,10 +14,12 @@ describe ::Perspective::View::InstanceBindings::RenderValueAsString do
     string_binding_container_class
   end
   
+  let( :string_binding_container_instance ) { string_binding_container.new }
+
   let( :object_instance ) { :symbol_value }
   
   let( :binding_instance ) do
-    binding_instance = string_binding_container.new.object_binding
+    binding_instance = string_binding_container_instance.•object_binding
     binding_instance.extend( ::Perspective::View::InstanceBindings::RenderValueAsString )
     binding_instance.«value» = object_instance
     binding_instance

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-files = [
+[
     
   'view/instance_bindings/render_file_value',
   'view/instance_bindings/render_value_as_string',
@@ -33,8 +33,4 @@ files = [
   'view/object_instance',
   'view/singleton_instance'
   
-]
-
-files.each do |this_file|
-  require_relative( this_file + '.rb' )
-end
+].each { |this_file| require_relative( this_file << '.rb' ) }

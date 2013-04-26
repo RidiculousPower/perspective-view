@@ -4,7 +4,38 @@ module ::Perspective::BindingTypes::ViewBindings::ClassBinding
   
   include ::Perspective::View::ObjectAndBindingInstance
   include ::Perspective::View::SingletonAndClassBindingInstance
-  
+
+  extend ::Module::Cluster
+  cluster( :perspective_view_class_binding ).before_include.cascade_to( :class ) do |hooked_instance|
+    hooked_instance.class_eval do
+
+      ##################
+      #  «view_class»  #
+      ##################
+
+      alias_singleton_method :«view_class», :«container_class»
+
+      ###################
+      #  «view_class»=  #
+      ###################
+
+      alias_singleton_method :«view_class»=, :«container_class»=
+
+      ################
+      #  view_class  #
+      ################
+
+      alias_singleton_method :view_class, :«view_class»
+
+      #################
+      #  view_class=  #
+      #################
+
+      alias_singleton_method :view_class=, :«view_class»=
+      
+    end
+  end
+
   ##################
   #  «view_class»  #
   ##################

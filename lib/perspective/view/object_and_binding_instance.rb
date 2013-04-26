@@ -16,12 +16,6 @@ module ::Perspective::View::ObjectAndBindingInstance
   #
   attr_configuration  :binding_order_declared_empty? => :«binding_order_declared_empty»=
   
-  ###########################################
-  #  binding_order_declared_empty? Default  #
-  ###########################################
-  
-  self.«binding_order_declared_empty» = false
-  
   #####################################
   #  «binding_order_declared_empty»=  #
   #####################################
@@ -29,6 +23,12 @@ module ::Perspective::View::ObjectAndBindingInstance
   ###
   #
   #
+  
+  ###########################################
+  #  binding_order_declared_empty? Default  #
+  ###########################################
+  
+  self.«binding_order_declared_empty» = false
   
   ######################
   #  rendering_empty!  #
