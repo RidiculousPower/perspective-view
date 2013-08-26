@@ -2,7 +2,7 @@
 
 module ::Perspective::View::ObjectAndInstanceBindingInstance
 
-  include ::CascadingConfiguration::Array
+  extend ::CascadingConfiguration::Array
 
   #####################
   #  «binding_order»  #
@@ -48,6 +48,6 @@ module ::Perspective::View::ObjectAndInstanceBindingInstance
   #  binding_order  #
   ###################
 
-  self::Controller.alias_instance_method :binding_order, :«binding_order»
+  alias_method :binding_order, :«binding_order»
   
 end

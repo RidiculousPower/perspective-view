@@ -6,8 +6,8 @@ module ::Perspective::View::ObjectInstance
   include ::Perspective::View::ObjectAndBindingInstance
   include ::Perspective::View::ObjectAndInstanceBindingInstance
   
-  include ::CascadingConfiguration::Setting
-  include ::CascadingConfiguration::Array
+  extend ::CascadingConfiguration::Setting
+  extend ::CascadingConfiguration::Array
 
 	############################
   #  «render_binding_order»  #

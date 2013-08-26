@@ -4,8 +4,8 @@ module ::Perspective::View::ObjectAndBindingInstance
   
   include ::Perspective::View::Configuration
   
-  include ::CascadingConfiguration::Array
-  include ::CascadingConfiguration::Setting
+  extend ::CascadingConfiguration::Array
+  extend ::CascadingConfiguration::Setting
     
   ###################################
   #  binding_order_declared_empty?  #
